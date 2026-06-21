@@ -1,9 +1,9 @@
-﻿# Stage 0: build frontend (npmmirror for yarn)
+﻿# Stage 0: build frontend (npmmirror + yarnpkg fallback for yarn)
 FROM --platform=$TARGETOS/$TARGETARCH node:22-alpine
 WORKDIR /app
 COPY . ./
 RUN yarn config set registry https://registry.npmmirror.com \
-    && yarn install --frozen-lockfile \
+    && (yarn install --frozen-lockfile || yarn config set registry https://registry.yarnpkg.com && yarn install --frozen-lockfile) \
     && yarn run build:production
 
 # Stage 1: PHP runtime (aliyun HTTP for alpine, aliyun for composer)
@@ -11,7 +11,7 @@ FROM --platform=$TARGETOS/$TARGETARCH php:8.3-fpm-alpine
 WORKDIR /app
 COPY . ./
 COPY --from=0 /app/public/assets ./public/assets
-RUN sed -i 's#https://dl-cdn.alpinelinux.org#http://mirrors.aliyun.com#g' /etc/apk/repositories \
+RUN sed -i "s#https://dl-cdn.alpinelinux.org#http://mirrors.aliyun.com#g" /etc/apk/repositories \
     && apk add --no-cache --update ca-certificates dcron curl git supervisor tar unzip nginx libpng-dev libxml2-dev libzip-dev certbot certbot-nginx mysql-client \
     && docker-php-ext-configure zip \
     && docker-php-ext-install bcmath gd pdo_mysql zip \
