@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 
 export default () => {
     const { t } = useTranslation("server");
+    const { t } = useTranslation("server");
     const [visible, setVisible] = useState(false);
 
     return (

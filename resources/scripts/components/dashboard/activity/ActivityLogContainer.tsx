@@ -16,6 +16,7 @@ import useLocationHash from '@/plugins/useLocationHash';
 
 export default () => {
     const { t } = useTranslation("dashboard");
+    const { t } = useTranslation("dashboard");
     const { hash } = useLocationHash();
     const { clearAndAddHttpError } = useFlashKey('account');
     const [filters, setFilters] = useState<ActivityLogFilters>({ page: 1, sorts: { timestamp: -1 } });
