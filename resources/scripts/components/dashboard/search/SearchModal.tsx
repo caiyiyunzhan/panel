@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React, { useEffect, useRef, useState } from 'react';
 import Modal, { RequiredModalProps } from '@/components/elements/Modal';
 import { Field, Form, Formik, FormikHelpers, useFormikContext } from 'formik';
@@ -46,6 +47,7 @@ const SearchWatcher = () => {
 };
 
 export default ({ ...props }: Props) => {
+    const { t } = useTranslation("strings");: Props) => {
     const ref = useRef<HTMLInputElement>(null);
     const isAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const [servers, setServers] = useState<Server[]>([]);
@@ -80,7 +82,7 @@ export default ({ ...props }: Props) => {
         <Formik
             onSubmit={search}
             validationSchema={object().shape({
-                term: string().min(3, 'Please enter at least three characters to begin searching.'),
+                term: string().min(3, t("enter_3_chars")),
             })}
             initialValues={{ term: '' } as Values}
         >
@@ -89,8 +91,8 @@ export default ({ ...props }: Props) => {
                     <Form>
                         <FormikFieldWrapper
                             name={'term'}
-                            label={'Search term'}
-                            description={'Enter a server name, uuid, or allocation to begin searching.'}
+                            label={t("search")}
+                            description={t("search_desc")}
                         >
                             <SearchWatcher />
                             <InputSpinner visible={isSubmitting}>
