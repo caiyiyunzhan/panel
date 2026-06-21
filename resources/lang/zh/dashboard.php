@@ -19,4 +19,9 @@ return [
     "api_credentials" => "API 凭证",
     "ssh_keys" => "SSH 密钥",
     "activity_log" => "活动日志",
+    "2fa_required" => "需要双因素验证",
+    "2fa_must_be_enabled" => "此账户需要启用双因素验证才能继续。",
+    "update_password" => "更新密码",
+    "update_email" => "更新邮箱",
+    "two_step_verification" => "两步验证",
 ];

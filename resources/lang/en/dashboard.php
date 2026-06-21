@@ -3,7 +3,7 @@
 return [
     "title" => "Dashboard",
     "showing_your_servers" => "Showing your servers",
-    "showing_others_servers" => "Showing others servers",
+    "showing_others_servers" => "Showing others' servers",
     "no_servers" => "There are no servers associated with your account.",
     "no_other_servers" => "There are no other servers to display.",
     "suspended" => "Suspended",
@@ -19,4 +19,9 @@ return [
     "api_credentials" => "API Credentials",
     "ssh_keys" => "SSH Keys",
     "activity_log" => "Activity Log",
+    "2fa_required" => "2-Factor Required",
+    "2fa_must_be_enabled" => "Your account must have two-factor authentication enabled in order to continue.",
+    "update_password" => "Update Password",
+    "update_email" => "Update Email Address",
+    "two_step_verification" => "Two-Step Verification",
 ];
