@@ -56,8 +56,73 @@
 @yield('assets')
 
         @include('layouts.scripts')
-    </head>
+    
+<script>
+window.__DIAG = { errors: [], i18nStatus: 'initializing' };
+window.addEventListener('error', function(e) {
+    window.__DIAG.errors.push({ msg: e.message, src: e.filename, line: e.lineno, col: e.colno });
+    console.error('[DIAG] JS ERROR:', e.message, 'at', e.filename + ':' + e.lineno);
+});
+window.addEventListener('unhandledrejection', function(e) {
+    window.__DIAG.errors.push({ msg: 'Promise rejection: ' + (e.reason ? e.reason.message : 'unknown'), type: 'promise' });
+    console.error('[DIAG] UNHANDLED REJECTION:', e.reason);
+});
+// Check if i18n exists and report
+var checkI18n = setInterval(function() {
+    if (typeof i18n !== 'undefined' && i18n) {
+        window.__DIAG.i18nStatus = 'i18n found - language: ' + i18n.language + ' - initialized: ' + i18n.isInitialized;
+        console.log('[DIAG]', window.__DIAG.i18nStatus);
+        clearInterval(checkI18n);
+    }
+}, 500);
+setTimeout(function() { clearInterval(checkI18n); if (window.__DIAG.i18nStatus === 'initializing') window.__DIAG.i18nStatus = 'TIMEOUT - i18n not found'; }, 15000);
+</script>
+</head>
     <body class="{{ $css['body'] ?? 'bg-neutral-50' }}">
+
+<div id="__diag_banner" style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#1a1a2e;color:#e94560;padding:8px 16px;font-family:monospace;font-size:12px;border-bottom:2px solid #e94560;display:none;">
+    <strong>DIAG:</strong> <span id="__diag_msg">Checking...</span>
+    <button onclick="this.parentElement.style.display='none'" style="float:right;background:#333;color:#fff;border:none;padding:2px 8px;cursor:pointer;">X</button>
+</div>
+<script>
+(function() {
+    var banner = document.getElementById('__diag_banner');
+    var msg = document.getElementById('__diag_msg');
+    function showDiag(text, color) {
+        banner.style.display = 'block';
+        banner.style.color = color || '#e94560';
+        msg.textContent = text;
+    }
+    function hideDiag() { banner.style.display = 'none'; }
+    
+    var i18nCheckCount = 0;
+    var i18nCheck = setInterval(function() {
+        i18nCheckCount++;
+        if (typeof i18n !== 'undefined' && i18n) {
+            var lang = i18n.language;
+            var ready = i18n.isInitialized;
+            if (lang === 'zh' && ready) {
+                showDiag('OK: i18n language=' + lang + ' initialized=' + ready + ' | errors=' + window.__DIAG.errors.length + ' | Bundle: fa35f904', '#50fa7b');
+                setTimeout(hideDiag, 5000);
+            } else if (lang !== 'zh') {
+                showDiag('WARN: i18n language is "' + lang + '" (expected "zh") | errors=' + window.__DIAG.errors.length, '#ffb86c');
+            } else {
+                showDiag('LOADING: language=' + lang + ' initialized=' + ready + ' | errors=' + window.__DIAG.errors.length, '#ffb86c');
+            }
+            clearInterval(i18nCheck);
+        } else if (i18nCheckCount > 30) {
+            showDiag('TIMEOUT: i18n not found after 15s. Errors: ' + JSON.stringify(window.__DIAG.errors.map(function(e){return e.msg})), '#e94560');
+            clearInterval(i18nCheck);
+        }
+    }, 500);
+    
+    // Also check for JS errors
+    var origErr = window.onerror;
+    window.addEventListener('error', function(e) {
+        showDiag('JS ERROR: ' + (e.message || 'unknown') + ' (see console)', '#e94560');
+    });
+})();
+</script>
         @section('content')
             @yield('above-container')
             @yield('container')
