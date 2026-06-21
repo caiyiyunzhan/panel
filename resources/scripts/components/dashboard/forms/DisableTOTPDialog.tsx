@@ -1,20 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
-import asDialog from '@/hoc/asDialog';
-import { Dialog, DialogWrapperContext } from '@/components/elements/dialog';
-import { Button } from '@/components/elements/button/index';
-import { Input } from '@/components/elements/inputs';
-import Tooltip from '@/components/elements/tooltip/Tooltip';
-import disableAccountTwoFactor from '@/api/account/disableAccountTwoFactor';
-import { useFlashKey } from '@/plugins/useFlash';
-import { useStoreActions } from '@/state/hooks';
-import FlashMessageRender from '@/components/FlashMessageRender';
+import React, { useContext, useEffect, useState } from "react";
+import asDialog from "@/hoc/asDialog";
+import { Dialog, DialogWrapperContext } from "@/components/elements/dialog";
+import { Button } from "@/components/elements/button/index";
+import { Input } from "@/components/elements/inputs";
+import Tooltip from "@/components/elements/tooltip/Tooltip";
+import disableAccountTwoFactor from "@/api/account/disableAccountTwoFactor";
+import { useFlashKey } from "@/plugins/useFlash";
+import { useStoreActions } from "@/state/hooks";
+import FlashMessageRender from "@/components/FlashMessageRender";
+import { useTranslation } from "react-i18next";
 
 const DisableTOTPDialog = () => {
     const [submitting, setSubmitting] = useState(false);
-    const [password, setPassword] = useState('');
-    const { clearAndAddHttpError } = useFlashKey('account:two-step');
+    const [password, setPassword] = useState("");
+    const { clearAndAddHttpError } = useFlashKey("account:two-step");
     const { close, setProps } = useContext(DialogWrapperContext);
     const updateUserData = useStoreActions((actions) => actions.user.updateUserData);
+    const { t } = useTranslation("dashboard");
+
+    useEffect(() => {
+        setProps((state) => ({ ...state, title: t("disable_2fa_title"), description: t("disable_2fa_desc") }));
+    }, []);
 
     useEffect(() => {
         setProps((state) => ({ ...state, preventExternalClose: submitting }));
@@ -38,27 +44,27 @@ const DisableTOTPDialog = () => {
     };
 
     return (
-        <form id={'disable-totp-form'} className={'mt-6'} onSubmit={submit}>
-            <FlashMessageRender byKey={'account:two-step'} className={'-mt-2 mb-6'} />
-            <label className={'block pb-1'} htmlFor={'totp-password'}>
-                Password
+        <form id={"disable-totp-form"} className={"mt-6"} onSubmit={submit}>
+            <FlashMessageRender byKey={"account:two-step"} className={"-mt-2 mb-6"} />
+            <label className={"block pb-1"} htmlFor={"totp-password"}>
+                {t("password")}
             </label>
             <Input.Text
-                id={'totp-password'}
-                type={'password'}
+                id={"totp-password"}
+                type={"password"}
                 variant={Input.Text.Variants.Loose}
                 value={password}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)}
             />
             <Dialog.Footer>
-                <Button.Text onClick={close}>Cancel</Button.Text>
+                <Button.Text onClick={close}>{t("cancel")}</Button.Text>
                 <Tooltip
                     delay={100}
                     disabled={password.length > 0}
-                    content={'You must enter your account password to continue.'}
+                    content={t("enter_password_2fa")}
                 >
-                    <Button.Danger type={'submit'} form={'disable-totp-form'} disabled={submitting || !password.length}>
-                        Disable
+                    <Button.Danger type={"submit"} form={"disable-totp-form"} disabled={submitting || !password.length}>
+                        {t("disable")}
                     </Button.Danger>
                 </Tooltip>
             </Dialog.Footer>
@@ -67,6 +73,6 @@ const DisableTOTPDialog = () => {
 };
 
 export default asDialog({
-    title: 'Disable Two-Step Verification',
-    description: 'Disabling two-step verification will make your account less secure.',
+    title: "Disable Two-Step Verification",
+    description: "Disabling two-step verification will make your account less secure.",
 })(DisableTOTPDialog);

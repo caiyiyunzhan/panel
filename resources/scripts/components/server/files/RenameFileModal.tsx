@@ -9,6 +9,7 @@ import tw from 'twin.macro';
 import Button from '@/components/elements/Button';
 import useFileManagerSwr from '@/plugins/useFileManagerSwr';
 import useFlash from '@/plugins/useFlash';
+import { useTranslation } from "react-i18next";
 
 interface FormikValues {
     name: string;
@@ -66,7 +67,7 @@ const RenameFileModal = ({ files, useMoveTerminology, ...props }: OwnProps) => {
                                     type={'string'}
                                     id={'file_name'}
                                     name={'name'}
-                                    label={'File Name'}
+                                    label={t("file_name")}
                                     description={
                                         useMoveTerminology
                                             ? 'Enter the new name and directory of this file or folder, relative to the current directory.'

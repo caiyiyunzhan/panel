@@ -7,6 +7,7 @@ import { ServerContext } from '@/state/server';
 import { join } from 'pathe';
 import tw from 'twin.macro';
 import Button from '@/components/elements/Button';
+import { useTranslation } from "react-i18next";
 
 type Props = RequiredModalProps & {
     onFileNamed: (name: string) => void;
@@ -16,7 +17,8 @@ interface Values {
     fileName: string;
 }
 
-export default ({ onFileNamed, onDismissed, ...props }: Props) => {
+export default ({
+    const { t } = useTranslation("server"); onFileNamed, onDismissed, ...props }: Props) => {
     const directory = ServerContext.useStoreState((state) => state.files.directory);
 
     const submit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
@@ -44,7 +46,7 @@ export default ({ onFileNamed, onDismissed, ...props }: Props) => {
                         <Field
                             id={'fileName'}
                             name={'fileName'}
-                            label={'File Name'}
+                            label={t("file_name")}
                             description={'Enter the name that this file should be saved as.'}
                             autoFocus
                         />

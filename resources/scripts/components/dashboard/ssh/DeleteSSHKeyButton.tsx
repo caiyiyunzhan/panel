@@ -1,16 +1,18 @@
-import tw from 'twin.macro';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import React, { useState } from 'react';
-import { useFlashKey } from '@/plugins/useFlash';
-import { deleteSSHKey, useSSHKeys } from '@/api/account/ssh-keys';
-import { Dialog } from '@/components/elements/dialog';
-import Code from '@/components/elements/Code';
+import tw from "twin.macro";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import { useFlashKey } from "@/plugins/useFlash";
+import { deleteSSHKey, useSSHKeys } from "@/api/account/ssh-keys";
+import { Dialog } from "@/components/elements/dialog";
+import Code from "@/components/elements/Code";
+import { useTranslation } from "react-i18next";
 
 export default ({ name, fingerprint }: { name: string; fingerprint: string }) => {
-    const { clearAndAddHttpError } = useFlashKey('account');
+    const { clearAndAddHttpError } = useFlashKey("account");
     const [visible, setVisible] = useState(false);
     const { mutate } = useSSHKeys();
+    const { t } = useTranslation("dashboard");
 
     const onClick = () => {
         clearAndAddHttpError();
@@ -28,8 +30,8 @@ export default ({ name, fingerprint }: { name: string; fingerprint: string }) =>
         <>
             <Dialog.Confirm
                 open={visible}
-                title={'Delete SSH Key'}
-                confirm={'Delete Key'}
+                title={t("delete_ssh_key")}
+                confirm={t("delete_key")}
                 onConfirmed={onClick}
                 onClose={() => setVisible(false)}
             >

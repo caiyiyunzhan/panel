@@ -7,13 +7,15 @@ import { httpErrorToHuman } from '@/api/http';
 import { Button } from '@/components/elements/button/index';
 import { Dialog } from '@/components/elements/dialog';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
+import { useTranslation } from "react-i18next";
 
 interface Props {
     scheduleId: number;
     onDeleted: () => void;
 }
 
-export default ({ scheduleId, onDeleted }: Props) => {
+export default ({
+    const { t } = useTranslation("server"); scheduleId, onDeleted }: Props) => {
     const [visible, setVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
@@ -41,7 +43,7 @@ export default ({ scheduleId, onDeleted }: Props) => {
             <Dialog.Confirm
                 open={visible}
                 onClose={() => setVisible(false)}
-                title={'Delete Schedule'}
+                title={t("delete_schedule")}
                 confirm={'Delete'}
                 onConfirmed={onDelete}
             >

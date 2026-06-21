@@ -14,6 +14,7 @@ import getServerBackups from '@/api/swr/getServerBackups';
 import { ServerContext } from '@/state/server';
 import FormikSwitch from '@/components/elements/FormikSwitch';
 import Can from '@/components/elements/Can';
+import { useTranslation } from "react-i18next";
 
 interface Values {
     name: string;
@@ -31,7 +32,7 @@ const ModalContent = ({ ...props }: RequiredModalProps) => {
                 <h2 css={tw`text-2xl mb-6`}>Create server backup</h2>
                 <Field
                     name={'name'}
-                    label={'Backup name'}
+                    label={t("backup_name")}
                     description={'If provided, the name that should be used to reference this backup.'}
                 />
                 <div css={tw`mt-6`}>
@@ -68,6 +69,7 @@ const ModalContent = ({ ...props }: RequiredModalProps) => {
 };
 
 export default () => {
+    const { t } = useTranslation("server");
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const [visible, setVisible] = useState(false);

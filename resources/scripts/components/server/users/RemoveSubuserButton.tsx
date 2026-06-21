@@ -9,8 +9,10 @@ import { Actions, useStoreActions } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import { httpErrorToHuman } from '@/api/http';
 import tw from 'twin.macro';
+import { useTranslation } from "react-i18next";
 
-export default ({ subuser }: { subuser: Subuser }) => {
+export default ({
+    const { t } = useTranslation("server"); subuser }: { subuser: Subuser }) => {
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -48,7 +50,7 @@ export default ({ subuser }: { subuser: Subuser }) => {
             </ConfirmationModal>
             <button
                 type={'button'}
-                aria-label={'Delete subuser'}
+                aria-label={t("delete_subuser")}
                 css={tw`block text-sm p-2 text-neutral-500 hover:text-red-600 transition-colors duration-150`}
                 onClick={() => setShowConfirmation(true)}
             >

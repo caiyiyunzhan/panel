@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React
+import { useTranslation } from "react-i18next";, { useEffect, useState } from 'react';
 import { ActivityLogFilters, useActivityLogs } from '@/api/account/activity';
 import { useFlashKey } from '@/plugins/useFlash';
 import PageContentBlock from '@/components/elements/PageContentBlock';
@@ -14,6 +15,7 @@ import Tooltip from '@/components/elements/tooltip/Tooltip';
 import useLocationHash from '@/plugins/useLocationHash';
 
 export default () => {
+    const { t } = useTranslation("dashboard");
     const { hash } = useLocationHash();
     const { clearAndAddHttpError } = useFlashKey('account');
     const [filters, setFilters] = useState<ActivityLogFilters>({ page: 1, sorts: { timestamp: -1 } });
@@ -31,7 +33,7 @@ export default () => {
     }, [error]);
 
     return (
-        <PageContentBlock title={'Account Activity Log'}>
+        <PageContentBlock title={t("account_activity_log")}>
             <FlashMessageRender byKey={'account'} />
             {(filters.filters?.event || filters.filters?.ip) && (
                 <div className={'flex justify-end mb-2'}>

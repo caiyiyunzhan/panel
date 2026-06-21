@@ -17,6 +17,7 @@ import PermissionTitleBox from '@/components/server/users/PermissionTitleBox';
 import asModal from '@/hoc/asModal';
 import PermissionRow from '@/components/server/users/PermissionRow';
 import ModalContext from '@/context/ModalContext';
+import { useTranslation } from "react-i18next";
 
 type Props = {
     subuser?: Subuser;
@@ -170,5 +171,6 @@ const EditSubuserModal = ({ subuser }: Props) => {
 };
 
 export default asModal<Props>({
+    const { t } = useTranslation("server");
     top: false,
 })(EditSubuserModal);

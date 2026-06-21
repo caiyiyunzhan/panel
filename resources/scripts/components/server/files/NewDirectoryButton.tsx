@@ -15,6 +15,7 @@ import FlashMessageRender from '@/components/FlashMessageRender';
 import { Dialog, DialogWrapperContext } from '@/components/elements/dialog';
 import Code from '@/components/elements/Code';
 import asDialog from '@/hoc/asDialog';
+import { useTranslation } from "react-i18next";
 
 interface Values {
     directoryName: string;
@@ -40,7 +41,7 @@ const generateDirectoryData = (name: string): FileObject => ({
 });
 
 const NewDirectoryDialog = asDialog({
-    title: 'Create Directory',
+    title: t("create_directory"),
 })(() => {
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const directory = ServerContext.useStoreState((state) => state.files.directory);
@@ -96,7 +97,8 @@ const NewDirectoryDialog = asDialog({
     );
 });
 
-export default ({ className }: WithClassname) => {
+export default ({
+    const { t } = useTranslation("server"); className }: WithClassname) => {
     const [open, setOpen] = useState(false);
 
     return (

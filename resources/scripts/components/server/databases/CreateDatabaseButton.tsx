@@ -10,6 +10,7 @@ import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
 import Button from '@/components/elements/Button';
 import tw from 'twin.macro';
+import { useTranslation } from "react-i18next";
 
 interface Values {
     databaseName: string;
@@ -29,6 +30,7 @@ const schema = object().shape({
 });
 
 export default () => {
+    const { t } = useTranslation("server");
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { addError, clearFlashes } = useFlash();
     const [visible, setVisible] = useState(false);
@@ -75,7 +77,7 @@ export default () => {
                                 type={'string'}
                                 id={'database_name'}
                                 name={'databaseName'}
-                                label={'Database Name'}
+                                label={t("database_name")}
                                 description={'A descriptive name for your database instance.'}
                             />
                             <div css={tw`mt-6`}>

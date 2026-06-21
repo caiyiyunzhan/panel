@@ -7,6 +7,7 @@ import { Button } from '@/components/elements/button/index';
 import Tooltip from '@/components/elements/tooltip/Tooltip';
 import Code from '@/components/elements/Code';
 import { useSignal } from '@preact/signals-react';
+import { useTranslation } from "react-i18next";
 
 const svgProps = {
     cx: 16,
@@ -67,11 +68,12 @@ const FileUploadList = () => {
 };
 
 const FileUploadListDialog = asDialog({
-    title: 'File Uploads',
+    title: t("file_uploads"),
     description: 'The following files are being uploaded to your server.',
 })(FileUploadList);
 
 export default () => {
+    const { t } = useTranslation("server");
     const open = useSignal(false);
 
     const count = ServerContext.useStoreState((state) => Object.keys(state.files.uploads).length);

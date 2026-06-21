@@ -8,6 +8,7 @@ import getServerAllocations from '@/api/swr/getServerAllocations';
 import { useFlashKey } from '@/plugins/useFlash';
 import { Dialog } from '@/components/elements/dialog';
 import { Button } from '@/components/elements/button/index';
+import { useTranslation } from "react-i18next";
 
 interface Props {
     allocation: number;
@@ -39,7 +40,7 @@ const DeleteAllocationButton = ({ allocation }: Props) => {
             <Dialog.Confirm
                 open={confirm}
                 onClose={() => setConfirm(false)}
-                title={'Remove Allocation'}
+                title={t("remove_allocation")}
                 confirm={'Delete'}
                 onConfirmed={deleteAllocation}
             >

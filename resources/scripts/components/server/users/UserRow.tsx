@@ -8,12 +8,14 @@ import Can from '@/components/elements/Can';
 import { useStoreState } from 'easy-peasy';
 import tw from 'twin.macro';
 import GreyRowBox from '@/components/elements/GreyRowBox';
+import { useTranslation } from "react-i18next";
 
 interface Props {
     subuser: Subuser;
 }
 
-export default ({ subuser }: Props) => {
+export default ({
+    const { t } = useTranslation("server"); subuser }: Props) => {
     const uuid = useStoreState((state) => state.user!.data!.uuid);
     const [visible, setVisible] = useState(false);
 
@@ -49,7 +51,7 @@ export default ({ subuser }: Props) => {
                     <Can action={'user.update'}>
                         <button
                             type={'button'}
-                            aria-label={'Edit subuser'}
+                            aria-label={t("edit_subuser")}
                             css={tw`block text-sm p-1 md:p-2 text-neutral-500 hover:text-neutral-100 transition-colors duration-150 mx-4`}
                             onClick={() => setVisible(true)}
                         >

@@ -102,4 +102,12 @@ return [
     "enable" => "启用",
     "disable" => "禁用",
     "save" => "保存",
+    "dashboard" => "仪表盘",
+    "admin_label" => "管理",
+    "account_settings" => "账户设置",
+    "sign_out" => "退出登录",
+    "loading" => "加载中...",
+    "back" => "返回",
+    "access_denied" => "访问被拒绝",
+    "enter_3_chars" => "请输入至少三个字符进行搜索。",
 ];

@@ -20,6 +20,7 @@ import { ServerContext } from '@/state/server';
 import tw from 'twin.macro';
 import ConfirmationModal from '@/components/elements/ConfirmationModal';
 import Icon from '@/components/elements/Icon';
+import { useTranslation } from "react-i18next";
 
 interface Props {
     schedule: Schedule;
@@ -29,7 +30,7 @@ interface Props {
 const getActionDetails = (action: string): [string, any] => {
     switch (action) {
         case 'command':
-            return ['Send Command', faCode];
+            return [t("send_command"), faCode];
         case 'power':
             return ['Send Power Action', faToggleOn];
         case 'backup':
@@ -39,7 +40,8 @@ const getActionDetails = (action: string): [string, any] => {
     }
 };
 
-export default ({ schedule, task }: Props) => {
+export default ({
+    const { t } = useTranslation("server"); schedule, task }: Props) => {
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { clearFlashes, addError } = useFlash();
     const [visible, setVisible] = useState(false);
