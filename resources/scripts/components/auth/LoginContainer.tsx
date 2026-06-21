@@ -1,15 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import login from '@/api/auth/login';
-import LoginFormContainer from '@/components/auth/LoginFormContainer';
-import { useStoreState } from 'easy-peasy';
-import { Formik, FormikHelpers } from 'formik';
-import { object, string } from 'yup';
-import Field from '@/components/elements/Field';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
-import Reaptcha from 'reaptcha';
-import useFlash from '@/plugins/useFlash';
+﻿import React, { useEffect, useRef, useState } from "react";
+import { Link, RouteComponentProps } from "react-router-dom";
+import login from "@/api/auth/login";
+import LoginFormContainer from "@/components/auth/LoginFormContainer";
+import { useStoreState } from "easy-peasy";
+import { Formik, FormikHelpers } from "formik";
+import { object, string } from "yup";
+import Field from "@/components/elements/Field";
+import tw from "twin.macro";
+import Button from "@/components/elements/Button";
+import Reaptcha from "reaptcha";
+import useFlash from "@/plugins/useFlash";
+import { useTranslation } from "react-i18next";
 
 interface Values {
     username: string;
@@ -18,10 +19,12 @@ interface Values {
 
 const LoginContainer = ({ history }: RouteComponentProps) => {
     const ref = useRef<Reaptcha>(null);
-    const [token, setToken] = useState('');
+    const [token, setToken] = useState("");
 
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const { enabled: recaptchaEnabled, siteKey } = useStoreState((state) => state.settings.data!.recaptcha);
+    const { t: tAuth } = useTranslation("auth");
+    const { t: tStrings } = useTranslation("strings");
 
     useEffect(() => {
         clearFlashes();
@@ -47,16 +50,16 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
             .then((response) => {
                 if (response.complete) {
                     // @ts-expect-error this is valid
-                    window.location = response.intended || '/';
+                    window.location = response.intended || "/";
                     return;
                 }
 
-                history.replace('/auth/login/checkpoint', { token: response.confirmationToken });
+                history.replace("/auth/login/checkpoint", { token: response.confirmationToken });
             })
             .catch((error) => {
                 console.error(error);
 
-                setToken('');
+                setToken("");
                 if (ref.current) ref.current.reset();
 
                 setSubmitting(false);
@@ -67,44 +70,44 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
     return (
         <Formik
             onSubmit={onSubmit}
-            initialValues={{ username: '', password: '' }}
+            initialValues={{ username: "", password: "" }}
             validationSchema={object().shape({
-                username: string().required('A username or email must be provided.'),
-                password: string().required('Please enter your account password.'),
+                username: string().required(tAuth("login_validation_user_required")),
+                password: string().required(tAuth("login_validation_password_required")),
             })}
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
-                <LoginFormContainer title={'Login to Continue'} css={tw`w-full flex`}>
-                    <Field light type={'text'} label={'Username or Email'} name={'username'} disabled={isSubmitting} />
+                <LoginFormContainer title={tAuth("login_to_continue")} css={tw`w-full flex`}>
+                    <Field light type={"text"} label={tStrings("user_identifier")} name={"username"} disabled={isSubmitting} />
                     <div css={tw`mt-6`}>
-                        <Field light type={'password'} label={'Password'} name={'password'} disabled={isSubmitting} />
+                        <Field light type={"password"} label={tStrings("password")} name={"password"} disabled={isSubmitting} />
                     </div>
                     <div css={tw`mt-6`}>
-                        <Button type={'submit'} size={'xlarge'} isLoading={isSubmitting} disabled={isSubmitting}>
-                            Login
+                        <Button type={"submit"} size={"xlarge"} isLoading={isSubmitting} disabled={isSubmitting}>
+                            {tStrings("login")}
                         </Button>
                     </div>
                     {recaptchaEnabled && (
                         <Reaptcha
                             ref={ref}
-                            size={'invisible'}
-                            sitekey={siteKey || '_invalid_key'}
+                            size={"invisible"}
+                            sitekey={siteKey || "_invalid_key"}
                             onVerify={(response) => {
                                 setToken(response);
                                 submitForm();
                             }}
                             onExpire={() => {
                                 setSubmitting(false);
-                                setToken('');
+                                setToken("");
                             }}
                         />
                     )}
                     <div css={tw`mt-6 text-center`}>
                         <Link
-                            to={'/auth/password'}
+                            to={"/auth/password"}
                             css={tw`text-xs text-neutral-500 tracking-wide no-underline uppercase hover:text-neutral-600`}
                         >
-                            Forgot password?
+                            {tAuth("forgot_password.label")}
                         </Link>
                     </div>
                 </LoginFormContainer>
