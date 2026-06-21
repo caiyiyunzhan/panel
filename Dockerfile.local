@@ -1,8 +1,9 @@
-﻿# Stage 0: build frontend (npmmirror + yarnpkg fallback for yarn)
+# Stage 0: build frontend (npmmirror + yarnpkg fallback for yarn)
 FROM --platform=$TARGETOS/$TARGETARCH node:22-alpine
 WORKDIR /app
 COPY . ./
-RUN yarn config set registry https://registry.npmmirror.com \
+RUN mkdir -p public/assets \
+    && yarn config set registry https://registry.npmmirror.com \
     && (yarn install --frozen-lockfile || yarn config set registry https://registry.yarnpkg.com && yarn install --frozen-lockfile) \
     && yarn run build:production
 

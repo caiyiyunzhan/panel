@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Application API
+    {{ __("admin.application_api") }}
 @endsection
 
 @section('content-header')
-    <h1>Application API<small>Control access credentials for managing this Panel via the API.</small></h1>
+    <h1>{{ __("admin.application_api") }}<small>{{ __("admin.application_api_desc") }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
-        <li class="active">Application API</li>
+        <li class="active">{{ __("admin.application_api") }}</li>
     </ol>
 @endsection
 
@@ -17,19 +17,19 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Credentials List</h3>
+                    <h3 class="box-title">{{ __("admin.credentials_list") }}</h3>
                     <div class="box-tools">
-                        <a href="{{ route('admin.api.new') }}" class="btn btn-sm btn-primary">Create New</a>
+                        <a href="{{ route('admin.api.new') }}" class="btn btn-sm btn-primary">{{ __("admin.create_new_key") }}</a>
                     </div>
                 </div>
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
-                            <th>Key</th>
-                            <th>Memo</th>
-                            <th>Last Used</th>
-                            <th>Created</th>
-                            <th>Created by</th>
+                            <th>{{ __("admin.key") }}</th>
+                            <th>{{ __("admin.memo") }}</th>
+                            <th>{{ __("admin.last_used") }}</th>
+                            <th>{{ __("admin.created") }}</th>
+                            <th>{{ __("admin.created_by") }}</th>
                             <th></th>
                         </tr>
                         @foreach($keys as $key)
@@ -76,12 +76,12 @@
                 event.preventDefault();
                 swal({
                     type: 'error',
-                    title: 'Revoke API Key',
-                    text: 'Once this API key is revoked any applications currently using it will stop working.',
+                    title: '{{ __("admin.revoke_key") }}',
+                    text: '{{ __("admin.revoke_key_confirm") }}',
                     showCancelButton: true,
                     allowOutsideClick: true,
                     closeOnConfirm: false,
-                    confirmButtonText: 'Revoke',
+                    confirmButtonText: '{{ __("admin.revoke") }}',
                     confirmButtonColor: '#d9534f',
                     showLoaderOnConfirm: true
                 }, function () {
@@ -95,15 +95,15 @@
                         swal({
                             type: 'success',
                             title: '',
-                            text: 'API Key has been revoked.'
+                            text: '{{ __("admin.key_revoked") }}'
                         });
                         self.parent().parent().slideUp();
                     }).fail(function (jqXHR) {
                         console.error(jqXHR);
                         swal({
                             type: 'error',
-                            title: 'Whoops!',
-                            text: 'An error occurred while attempting to revoke this key.'
+                            title: '{{ __("admin.whoops") }}',
+                            text: '{{ __("admin.key_revoke_error") }}'
                         });
                     });
                 });

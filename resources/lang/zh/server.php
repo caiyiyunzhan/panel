@@ -129,4 +129,86 @@ return [
     "permissions_only_assigned" => "仅您账户当前已分配的权限可以在创建或修改其他用户时被选择。",
     "user_email" => "用户邮箱",
     "user_email_help" => "输入您想要邀请作为此服务器子用户的用户邮箱地址。",
+
+    // === NEW KEYS for comprehensive localization ===
+    // Conflict states
+    "server_suspended" => "服务器已暂停",
+    "node_under_maintenance" => "节点维护中",
+    "transferring" => "迁移中",
+    "restoring_from_backup" => "从备份恢复中",
+
+    // Database
+    "confirm_database_name" => "确认数据库名称",
+    "confirm_database_deletion" => "确认数据库删除",
+
+    // Schedules
+    "edit_schedule" => "编辑计划",
+    "schedule_name_desc" => "此计划的显示名称。",
+    "show_cheatsheet" => "显示 Cron 速查表",
+    "schedule_enabled" => "计划已启用",
+    "create_schedule_button" => "创建计划",
+    "save_changes_button" => "保存更改",
+
+    // Schedule tasks
+    "task_action" => "任务操作",
+    "send_power_action" => "发送电源操作",
+    "create_backup" => "创建备份",
+    "unknown_action" => "未知操作",
+    "confirm_task_deletion" => "确认删除任务",
+    "delete_task" => "删除任务",
+    "edit_scheduled_task" => "编辑计划任务",
+    "delete_scheduled_task" => "删除计划任务",
+    "task" => "任务",
+
+    // Activity / Events
+    "view_event_metadata" => "查看活动详情",
+
+    // Power actions
+    "start_server" => "启动服务器",
+    "restart_server" => "重启服务器",
+    "stop_server" => "停止服务器",
+    "kill_server" => "强制停止服务器",
+
+    // Files
+    "deleting" => "删除中",
+    "moving" => "移动中",
+    "copying" => "复制中",
+    "archiving" => "归档中",
+    "unarchiving" => "解压中",
+    "uploading" => "上传中",
+    "file_too_large" => "此文件过大，无法在编辑器中打开。",
+    "binary_file" => "二进制文件",
+
+    // Backups
+    "backups_title" => "备份",
+    "restore_backup" => "恢复备份",
+    "delete_backup" => "删除备份",
+    "backup_in_progress" => "备份进行中",
+    "restore_in_progress" => "恢复进行中",
+    "backup_completed" => "备份已完成",
+    "backup_failed" => "备份失败",
+    "restore_completed" => "恢复已完成",
+    "restore_failed" => "恢复失败",
+
+    // Users/Subusers
+    "edit_subuser" => "编辑子用户",
+    "edit_subuser_permissions" => "编辑子用户权限",
+    "subuser_permissions" => "子用户权限",
+    "select_permissions" => "选择权限",
+    "remove_subuser_confirm" => "确定要移除此子用户吗？",
+
+    // General server
+    "server_suspended_admin" => "此服务器已被管理员暂停。",
+    "connection_error" => "无法连接到服务器。请稍后重试。",
+    "no_servers" => "没有服务器。",
+    "create_server" => "创建服务器",
+    "server_console" => "服务器控制台",
+    "server_settings" => "服务器设置",
+    "server_startup" => "启动参数",
+    "server_files" => "文件管理",
+    "server_databases" => "数据库管理",
+    "server_schedules" => "计划任务",
+    "server_users" => "用户管理",
+    "server_backups" => "备份管理",
+    "server_network" => "网络管理",
 ];

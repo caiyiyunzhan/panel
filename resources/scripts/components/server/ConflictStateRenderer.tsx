@@ -18,28 +18,28 @@ export default () => {
         <ScreenBlock
             title={t("running_installer")}
             image={ServerInstallSvg}
-            message={'Your server should be ready soon, please try again in a few minutes.'}
+            message={t("server_installing_message")}
         />
     ) : status === 'suspended' ? (
         <ScreenBlock
-            title={'Server Suspended'}
+            title={t("server_suspended")}
             image={ServerErrorSvg}
-            message={'This server is suspended and cannot be accessed.'}
+            message={t("server_suspended_message")}
         />
     ) : isNodeUnderMaintenance ? (
         <ScreenBlock
-            title={'Node under Maintenance'}
+            title={t("node_under_maintenance")}
             image={ServerErrorSvg}
-            message={'The node of this server is currently under maintenance.'}
+            message={t("node_under_maintenance_message")}
         />
     ) : (
         <ScreenBlock
-            title={isTransferring ? 'Transferring' : 'Restoring from Backup'}
+            title={isTransferring ? t("transferring") : t("restoring_from_backup")}
             image={ServerRestoreSvg}
             message={
                 isTransferring
-                    ? 'Your server is being transferred to a new node, please check back later.'
-                    : 'Your server is currently being restored from a backup, please check back in a few minutes.'
+                    ? t("server_transferring_message")
+                    : t("server_restoring_message")
             }
         />
     );

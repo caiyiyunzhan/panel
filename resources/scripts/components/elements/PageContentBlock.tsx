@@ -3,6 +3,7 @@ import ContentContainer from '@/components/elements/ContentContainer';
 import { CSSTransition } from 'react-transition-group';
 import tw from 'twin.macro';
 import FlashMessageRender from '@/components/FlashMessageRender';
+import { useTranslation } from "react-i18next";
 
 export interface PageContentBlockProps {
     title?: string;
@@ -11,6 +12,8 @@ export interface PageContentBlockProps {
 }
 
 const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey, className, children }) => {
+    const { t } = useTranslation("strings");
+
     useEffect(() => {
         if (title) {
             document.title = title;
@@ -26,15 +29,7 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
                 </ContentContainer>
                 <ContentContainer css={tw`mb-4`}>
                     <p css={tw`text-center text-neutral-500 text-xs`}>
-                        <a
-                            rel={'noopener nofollow noreferrer'}
-                            href={'https://pterodactyl.io'}
-                            target={'_blank'}
-                            css={tw`no-underline text-neutral-500 hover:text-neutral-300`}
-                        >
-                            Pterodactyl&reg;
-                        </a>
-                        &nbsp;&copy; 2015 - {new Date().getFullYear()}
+                        <span dangerouslySetInnerHTML={{ __html: t("copyright", { year: new Date().getFullYear() }) }} />
                     </p>
                 </ContentContainer>
             </>

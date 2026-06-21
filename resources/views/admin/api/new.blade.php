@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    Application API
+    {{ __("admin.application_api") }}
 @endsection
 
 @section('content-header')
-    <h1>Application API<small>Create a new application API key.</small></h1>
+    <h1>{{ __("admin.application_api") }}<small>{{ __("admin.create_api_key_desc") }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
-        <li><a href="{{ route('admin.api.index') }}">Application API</a></li>
-        <li class="active">New Credentials</li>
+        <li><a href="{{ route('admin.api.index') }}">{{ __("admin.application_api") }}</a></li>
+        <li class="active">{{ __("admin.new_api_key_title") }}</li>
     </ol>
 @endsection
 
@@ -19,12 +19,12 @@
             <div class="col-sm-8 col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Select Permissions</h3>
+                        <h3 class="box-title">{{ __("admin.select_permissions") }}</h3>
                         <div class="box-tools">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-default" id="btn-bulk-read">Read All</button>
-                                <button type="button" class="btn btn-sm btn-default" id="btn-bulk-rw">Read &amp; Write All</button>
-                                <button type="button" class="btn btn-sm btn-default" id="btn-bulk-none">None All</button>
+                                <button type="button" class="btn btn-sm btn-default" id="btn-bulk-read">{{ __("admin.read_all") }}</button>
+                                <button type="button" class="btn btn-sm btn-default" id="btn-bulk-rw">{{ __("admin.read_write_all") }}</button>
+                                <button type="button" class="btn btn-sm btn-default" id="btn-bulk-none">{{ __("admin.none_all") }}</button>
                             </div>
                         </div>
                     </div>
@@ -39,21 +39,21 @@
                                     <td class="text-center" style="vertical-align: middle;">
                                         <div class="radio radio-primary" style="margin: 0;">
                                             <input type="radio" id="r_{{ $resource }}" name="r_{{ $resource }}" value="{{ $permissions['r'] }}">
-                                            <label for="r_{{ $resource }}">Read</label>
+                                            <label for="r_{{ $resource }}">{{ __("admin.read") }}</label>
                                         </div>
                                     </td>
                                     
                                     <td class="text-center" style="vertical-align: middle;">
                                         <div class="radio radio-primary" style="margin: 0;">
                                             <input type="radio" id="rw_{{ $resource }}" name="r_{{ $resource }}" value="{{ $permissions['rw'] }}">
-                                            <label for="rw_{{ $resource }}">Read &amp; Write</label>
+                                            <label for="rw_{{ $resource }}">{{ __("admin.read_write") }}</label>
                                         </div>
                                     </td>
                                     
                                     <td class="text-center" style="vertical-align: middle;">
                                         <div class="radio" style="margin: 0;">
                                             <input type="radio" id="n_{{ $resource }}" name="r_{{ $resource }}" value="{{ $permissions['n'] }}" checked>
-                                            <label for="n_{{ $resource }}">None</label>
+                                            <label for="n_{{ $resource }}">{{ __("admin.none") }}</label>
                                         </div>
                                     </td>
                                 </tr>
@@ -66,14 +66,14 @@
                 <div class="box box-primary">
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="control-label" for="memoField">Description <span class="field-required"></span></label>
+                            <label class="control-label" for="memoField">{{ __("admin.description") }} <span class="field-required"></span></label>
                             <input id="memoField" type="text" name="memo" class="form-control">
                         </div>
-                        <p class="text-muted">Once you have assigned permissions and created this set of credentials you will be unable to come back and edit it. If you need to make changes down the road you will need to create a new set of credentials.</p>
+                        <p class="text-muted">{{ __("admin.api_key_irreversible_notice") }}</p>
                     </div>
                     <div class="box-footer">
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-success btn-sm pull-right">Create Credentials</button>
+                        <button type="submit" class="btn btn-success btn-sm pull-right">{{ __("admin.create_credentials") }}</button>
                     </div>
                 </div>
             </div>
