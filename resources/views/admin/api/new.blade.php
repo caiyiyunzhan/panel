@@ -7,7 +7,7 @@
 @section('content-header')
     <h1>Application API<small>Create a new application API key.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
+        <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
         <li><a href="{{ route('admin.api.index') }}">Application API</a></li>
         <li class="active">New Credentials</li>
     </ol>

@@ -5,10 +5,10 @@
 @endsection
 
 @section('content-header')
-    <h1>Locations<small>All locations that nodes can be assigned to for easier categorization.</small></h1>
+    <h1>{{ __("admin.locations") }}<small>All locations that nodes can be assigned to for easier categorization.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">{{ __('admin.admin_label') }}</a></li>
-        <li class="active">Locations</li>
+        <li class="active">{{ __("admin.locations") }}</li>
     </ol>
 @endsection
 

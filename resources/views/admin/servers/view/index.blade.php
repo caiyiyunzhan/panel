@@ -7,8 +7,8 @@
 @section('content-header')
     <h1>{{ $server->name }}<small>{{ str_limit($server->description) }}</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.servers') }}">Servers</a></li>
+        <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
+        <li><a href="{{ route('admin.servers') }}">{{ __("admin.servers") }}</a></li>
         <li class="active">{{ $server->name }}</li>
     </ol>
 @endsection
@@ -105,11 +105,11 @@
                                 <td><code>{{ $server->io }}</code></td>
                             </tr>
                             <tr>
-                                <td>Default Connection</td>
+                                <td>Default {{ __("admin.server_connection") }}</td>
                                 <td><code>{{ $server->allocation->ip }}:{{ $server->allocation->port }}</code></td>
                             </tr>
                             <tr>
-                                <td>Connection Alias</td>
+                                <td>{{ __("admin.server_connection") }} Alias</td>
                                 <td>
                                     @if($server->allocation->alias !== $server->allocation->ip)
                                         <code>{{ $server->allocation->alias }}:{{ $server->allocation->port }}</code>
@@ -128,11 +128,11 @@
         <div class="box box-primary">
             <div class="box-body" style="padding-bottom: 0px;">
                 <div class="row">
-                    @if($server->isSuspended())
+                    @if($server->is{{ __("admin.server_suspended_status") }}())
                         <div class="col-sm-12">
                             <div class="small-box bg-yellow">
                                 <div class="inner">
-                                    <h3 class="no-margin">Suspended</h3>
+                                    <h3 class="no-margin">{{ __("admin.server_suspended_status") }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +141,7 @@
                         <div class="col-sm-12">
                             <div class="small-box {{ (! $server->isInstalled()) ? 'bg-blue' : 'bg-maroon' }}">
                                 <div class="inner">
-                                    <h3 class="no-margin">{{ (! $server->isInstalled()) ? 'Installing' : 'Install Failed' }}</h3>
+                                    <h3 class="no-margin">{{ (! $server->isInstalled()) ? '{{ __("admin.server_installing") }}' : '{{ __("admin.install_failed") }}' }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -150,11 +150,11 @@
                         <div class="small-box bg-gray">
                             <div class="inner">
                                 <h3>{{ str_limit($server->user->username, 16) }}</h3>
-                                <p>Server Owner</p>
+                                <p>{{ __("admin.server_owner_label") }}</p>
                             </div>
                             <div class="icon"><i class="fa fa-user"></i></div>
                             <a href="{{ route('admin.users.view', $server->user->id) }}" class="small-box-footer">
-                                More info <i class="fa fa-arrow-circle-right"></i>
+                                {{ __("admin.more_info") }} <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
                     </div>
@@ -162,11 +162,11 @@
                         <div class="small-box bg-gray">
                             <div class="inner">
                                 <h3>{{ str_limit($server->node->name, 16) }}</h3>
-                                <p>Server Node</p>
+                                <p>{{ __("admin.server_node") }}</p>
                             </div>
                             <div class="icon"><i class="fa fa-codepen"></i></div>
                             <a href="{{ route('admin.nodes.view', $server->node->id) }}" class="small-box-footer">
-                                More info <i class="fa fa-arrow-circle-right"></i>
+                                {{ __("admin.more_info") }} <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
                     </div>

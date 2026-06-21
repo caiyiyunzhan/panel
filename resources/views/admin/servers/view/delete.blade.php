@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('title')
-    Server — {{ $server->name }}: Delete
+    Server — {{ $server->name }}: {{ __("admin.delete_server") }}
 @endsection
 
 @section('content-header')
-    <h1>{{ $server->name }}<small>Delete this server from the panel.</small></h1>
+    <h1>{{ $server->name }}<small>{{ __("admin.delete_server_desc") }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Admin</a></li>
         <li><a href="{{ route('admin.servers') }}">Servers</a></li>

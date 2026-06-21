@@ -11,7 +11,7 @@ const hash = module.hot ? Date.now().toString(16) : process.env.WEBPACK_BUILD_HA
 i18n.use(I18NextMultiloadBackendAdapter)
     .use(initReactI18next)
     .init({
-        debug: process.env.DEBUG === "true",
+        debug: true,
         lng: "zh",
         fallbackLng: "zh",
         keySeparator: ".",

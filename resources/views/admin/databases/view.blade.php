@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Database Hosts &rarr; View &rarr; {{ $host->name }}
+    {{ __("admin.database_hosts") }} &rarr; View &rarr; {{ $host->name }}
 @endsection
 
 @section('content-header')
     <h1>{{ $host->name }}<small>Viewing associated databases and details for this database host.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.databases') }}">Database Hosts</a></li>
+        <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
+        <li><a href="{{ route('admin.databases') }}">{{ __("admin.database_hosts") }}</a></li>
         <li class="active">{{ $host->name }}</li>
     </ol>
 @endsection
@@ -85,7 +85,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Databases</h3>
+                <h3 class="box-title">{{ __("admin.databases") }}</h3>
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">

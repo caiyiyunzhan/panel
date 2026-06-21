@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Manage User: {{ $user->username }}
+    {{ __("admin.edit_user") }}: {{ $user->username }}
 @endsection
 
 @section('content-header')
     <h1>{{ $user->name_first }} {{ $user->name_last}}<small>{{ $user->username }}</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.users') }}">Users</a></li>
+        <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
+        <li><a href="{{ route('admin.users') }}">{{ __("admin.users") }}</a></li>
         <li class="active">{{ $user->username }}</li>
     </ol>
 @endsection

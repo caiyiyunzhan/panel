@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Server — {{ $server->name }}: Startup
+    Server — {{ $server->name }}: {{ __("admin.startup_config") }}
 @endsection
 
 @section('content-header')
@@ -21,10 +21,10 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Startup Command Modification</h3>
+                    <h3 class="box-title">{{ __("admin.startup_command") }} Modification</h3>
                 </div>
                 <div class="box-body">
-                    <label for="pStartup" class="form-label">Startup Command</label>
+                    <label for="pStartup" class="form-label">{{ __("admin.startup_command") }}</label>
                     <input id="pStartup" name="startup" class="form-control" type="text" value="{{ old('startup', $server->startup) }}" />
                     <p class="small text-muted">Edit your server's startup command here. The following variables are available by default: <code>@{{SERVER_MEMORY}}</code>, <code>@{{SERVER_IP}}</code>, and <code>@{{SERVER_PORT}}</code>.</p>
                 </div>
@@ -142,7 +142,7 @@
             }
 
             if (!_.get(objectChain, 'startup', false)) {
-                $('#pDefaultStartupCommand').val(_.get(parentChain, 'startup', 'ERROR: Startup Not Defined!'));
+                $('#pDefaultStartupCommand').val(_.get(parentChain, 'startup', 'ERROR: {{ __("admin.startup_config") }} Not Defined!'));
             } else {
                 $('#pDefaultStartupCommand').val(_.get(objectChain, 'startup'));
             }
@@ -162,7 +162,7 @@
                                 <p class="no-margin small text-muted">' + escapeHtml(item.description) + '</p> \
                             </div> \
                             <div class="box-footer"> \
-                                <p class="no-margin text-muted small"><strong>Startup Command Variable:</strong> <code>' + escapeHtml(item.env_variable) + '</code></p> \
+                                <p class="no-margin text-muted small"><strong>{{ __("admin.startup_command") }} Variable:</strong> <code>' + escapeHtml(item.env_variable) + '</code></p> \
                                 <p class="no-margin text-muted small"><strong>Input Rules:</strong> <code>' + escapeHtml(item.rules) + '</code></p> \
                             </div> \
                         </div> \

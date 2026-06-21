@@ -6,10 +6,10 @@
 @endsection
 
 @section('content-header')
-    <h1>Mounts<small>Configure and manage additional mount points for servers.</small></h1>
+    <h1>{{ __("admin.mounts") }}<small>Configure and manage additional mount points for servers.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li class="active">Mounts</li>
+        <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
+        <li class="active">{{ __("admin.mounts") }}</li>
     </ol>
 @endsection
 
@@ -34,8 +34,8 @@
                                 <th>Source</th>
                                 <th>Target</th>
                                 <th class="text-center">Eggs</th>
-                                <th class="text-center">Nodes</th>
-                                <th class="text-center">Servers</th>
+                                <th class="text-center">{{ __("admin.nodes") }}</th>
+                                <th class="text-center">{{ __("admin.servers") }}</th>
                             </tr>
 
                             @foreach ($mounts as $mount)

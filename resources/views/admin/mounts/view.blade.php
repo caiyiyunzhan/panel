@@ -8,8 +8,8 @@
 @section('content-header')
     <h1>{{ $mount->name }}<small>{{ str_limit($mount->description, 75) }}</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.mounts') }}">Mounts</a></li>
+        <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
+        <li><a href="{{ route('admin.mounts') }}">{{ __("admin.mounts") }}</a></li>
         <li class="active">{{ $mount->name }}</li>
     </ol>
 @endsection
@@ -130,7 +130,7 @@
 
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Nodes</h3>
+                    <h3 class="box-title">{{ __("admin.nodes") }}</h3>
 
                     <div class="box-tools">
                         <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addNodesModal">Add Nodes</button>
@@ -221,7 +221,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <label for="pNodes">Nodes</label>
+                                <label for="pNodes">{{ __("admin.nodes") }}</label>
                                 <select id="pNodes" name="nodes[]" class="form-control" multiple>
                                     @foreach ($locations as $location)
                                         <optgroup label="{{ $location->long }} ({{ $location->short }})">

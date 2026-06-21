@@ -7,8 +7,8 @@
 @section('content-header')
     <h1>{{ $nest->name }}<small>{{ str_limit($nest->description, 50) }}</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.nests') }}">Nests</a></li>
+        <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
+        <li><a href="{{ route('admin.nests') }}">{{ __("admin.nests") }}</a></li>
         <li class="active">{{ $nest->name }}</li>
     </ol>
 @endsection
@@ -81,7 +81,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
-                        <th class="text-center">Servers</th>
+                        <th class="text-center">{{ __("admin.servers") }}</th>
                         <th class="text-center"></th>
                     </tr>
                     @foreach($nest->eggs as $egg)

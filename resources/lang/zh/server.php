@@ -120,4 +120,13 @@ return [
     "chmod_file" => "修改文件权限",
     "active" => "活跃","inactive" => "停用","processing" => "处理中","last_run" => "上次运行","next_run" => "下次运行","na" => "无","cron_minute" => "分钟","cron_hour" => "小时","cron_day_month" => "日(月)","cron_month" => "月","cron_day_week" => "日(周)",
     "chmod_description" => "输入此文件的新权限。",
+    "edit" => "修改",
+    "view" => "查看",
+    "save" => "保存",
+    "invite_user" => "邀请用户",
+    "permissions_for" => "的权限",
+    "create" => "新建",
+    "permissions_only_assigned" => "仅您账户当前已分配的权限可以在创建或修改其他用户时被选择。",
+    "user_email" => "用户邮箱",
+    "user_email_help" => "输入您想要邀请作为此服务器子用户的用户邮箱地址。",
 ];

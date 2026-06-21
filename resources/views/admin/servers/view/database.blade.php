@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 
 @section('title')
-    Server — {{ $server->name }}: Databases
+    Server — {{ $server->name }}: {{ __("admin.databases") }}
 @endsection
 
 @section('content-header')
-    <h1>{{ $server->name }}<small>Manage server databases.</small></h1>
+    <h1>{{ $server->name }}<small>{{ __("admin.database_management_desc") }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Admin</a></li>
         <li><a href="{{ route('admin.servers') }}">Servers</a></li>
         <li><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a></li>
-        <li class="active">Databases</li>
+        <li class="active">{{ __("admin.database") }}s</li>
     </ol>
 @endsection
 
@@ -19,20 +19,20 @@
 <div class="row">
     <div class="col-sm-7">
         <div class="alert alert-info">
-            Database passwords can be viewed when <a href="/server/{{ $server->uuidShort }}/databases">visiting this server</a> on the front-end.
+            {{ __("admin.database") }} passwords can be viewed when <a href="/server/{{ $server->uuidShort }}/databases">visiting this server</a> on the front-end.
         </div>
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Active Databases</h3>
+                <h3 class="box-title">Active {{ __("admin.database") }}s</h3>
             </div>
             <div class="box-body table-responsible no-padding">
                 <table class="table table-hover">
                     <tr>
-                        <th>Database</th>
+                        <th>{{ __("admin.database") }}</th>
                         <th>Username</th>
-                        <th>Connections From</th>
-                        <th>Host</th>
-                        <th>Max Connections</th>
+                        <th>{{ __("admin.database_connections") }} From</th>
+                        <th>{{ __("admin.host") }}</th>
+                        <th>Max {{ __("admin.database_connections") }}</th>
                         <th></th>
                     </tr>
                     @foreach($server->databases as $database)
@@ -59,13 +59,13 @@
     <div class="col-sm-5">
         <div class="box box-success">
             <div class="box-header with-border">
-                <h3 class="box-title">Create New Database</h3>
+                <h3 class="box-title">Create {{ __("admin.create_database") }}</h3>
             </div>
             <form action="{{ route('admin.servers.view.database', $server->id) }}" method="POST">
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="pDatabaseHostId" class="control-label">Database Host</label>
-                        <select id="pDatabaseHostId" name="database_host_id" class="form-control">
+                        <label for="p{{ __("admin.database") }}{{ __("admin.host") }}Id" class="control-label">{{ __("admin.database") }} {{ __("admin.host") }}</label>
+                        <select id="p{{ __("admin.database") }}{{ __("admin.host") }}Id" name="database_host_id" class="form-control">
                             @foreach($hosts as $host)
                                 <option value="{{ $host->id }}">{{ $host->name }}</option>
                             @endforeach
@@ -73,19 +73,19 @@
                         <p class="text-muted small">Select the host database server that this database should be created on.</p>
                     </div>
                     <div class="form-group">
-                        <label for="pDatabaseName" class="control-label">Database</label>
+                        <label for="p{{ __("admin.database") }}Name" class="control-label">{{ __("admin.database") }}</label>
                         <div class="input-group">
                             <span class="input-group-addon">s{{ $server->id }}_</span>
-                            <input id="pDatabaseName" type="text" name="database" class="form-control" placeholder="database" />
+                            <input id="p{{ __("admin.database") }}Name" type="text" name="database" class="form-control" placeholder="database" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="pRemote" class="control-label">Connections</label>
+                        <label for="pRemote" class="control-label">{{ __("admin.database_connections") }}</label>
                         <input id="pRemote" type="text" name="remote" class="form-control" value="%" />
                         <p class="text-muted small">This should reflect the IP address that connections are allowed from. Uses standard MySQL notation. If unsure leave as <code>%</code>.</p>
                     </div>
                     <div class="form-group">
-                        <label for="pmax_connections" class="control-label">Concurrent Connections</label>
+                        <label for="pmax_connections" class="control-label">Concurrent {{ __("admin.database_connections") }}</label>
                         <input id="pmax_connections" type="text" name="max_connections" class="form-control"/>
                         <p class="text-muted small">This should reflect the max number of concurrent connections from this user to the database. Leave empty for unlimited.</p>
                     </div>
@@ -93,7 +93,7 @@
                 <div class="box-footer">
                     {!! csrf_field() !!}
                     <p class="text-muted small no-margin">A username and password for this database will be randomly generated after form submission.</p>
-                    <input type="submit" class="btn btn-sm btn-success pull-right" value="Create Database" />
+                    <input type="submit" class="btn btn-sm btn-success pull-right" value="{{ __("admin.create_database") }}" />
                 </div>
             </form>
         </div>
@@ -104,7 +104,7 @@
 @section('footer-scripts')
     @parent
     <script>
-    $('#pDatabaseHost').select2();
+    $('#p{{ __("admin.database") }}{{ __("admin.host") }}').select2();
     $('[data-action="remove"]').click(function (event) {
         event.preventDefault();
         var self = $(this);

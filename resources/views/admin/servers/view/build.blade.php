@@ -5,7 +5,7 @@
 @endsection
 
 @section('content-header')
-    <h1>{{ $server->name }}<small>Control allocations and system resources for this server.</small></h1>
+    <h1>{{ $server->name }}<small>{{ __("admin.build_config_desc") }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Admin</a></li>
         <li><a href="{{ route('admin.servers') }}">Servers</a></li>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="box-body">
                 <div class="form-group">
-                        <label for="cpu" class="control-label">CPU Limit</label>
+                        <label for="cpu" class="control-label">{{ __("admin.cpu_limit") }}</label>
                         <div class="input-group">
                             <input type="text" name="cpu" class="form-control" value="{{ old('cpu', $server->cpu) }}"/>
                             <span class="input-group-addon">%</span>
@@ -33,7 +33,7 @@
                         <p class="text-muted small">Each <em>virtual</em> core (thread) on the system is considered to be <code>100%</code>. Setting this value to <code>0</code> will allow a server to use CPU time without restrictions.</p>
                     </div>
                     <div class="form-group">
-                        <label for="threads" class="control-label">CPU Pinning</label>
+                        <label for="threads" class="control-label">{{ __("admin.cpu_pinning") }}</label>
                         <div>
                             <input type="text" name="threads" class="form-control" value="{{ old('threads', $server->threads) }}"/>
                         </div>
@@ -48,7 +48,7 @@
                         <p class="text-muted small">The maximum amount of memory allowed for this container. Setting this to <code>0</code> will allow unlimited memory in a container.</p>
                     </div>
                     <div class="form-group">
-                        <label for="swap" class="control-label">Allocated Swap</label>
+                        <label for="swap" class="control-label">Allocated {{ __("admin.swap_limit") }}</label>
                         <div class="input-group">
                             <input type="text" name="swap" data-multiplicator="true" class="form-control" value="{{ old('swap', $server->swap) }}"/>
                             <span class="input-group-addon">MiB</span>
@@ -71,7 +71,7 @@
                         <p class="text-muted small"><strong>Advanced</strong>: The IO performance of this server relative to other <em>running</em> containers on the system. Value should be between <code>10</code> and <code>1000</code>.</code></p>
                     </div>
                     <div class="form-group">
-                        <label for="cpu" class="control-label">OOM Killer</label>
+                        <label for="cpu" class="control-label">{{ __("admin.oom_disabled") }}</label>
                         <div>
                             <div class="radio radio-danger radio-inline">
                                 <input type="radio" id="pOomKillerEnabled" value="0" name="oom_disabled" @if(!$server->oom_disabled)checked @endif>
@@ -126,7 +126,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Allocation Management</h3>
+                            <h3 class="box-title">{{ __("admin.allocation_management") }}</h3>
                         </div>
                         <div class="box-body">
                             <div class="form-group">

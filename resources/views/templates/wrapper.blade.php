@@ -32,7 +32,28 @@
             @endif
         @show
 
-        @yield('assets')
+        
+        <script>
+            (function() {
+                console.log('[DIAG] SiteConfiguration.locale:', window.SiteConfiguration ? window.SiteConfiguration.locale : 'NOT SET');
+                console.log('[DIAG] navigator.language:', navigator.language);
+                // Wait for i18next to init
+                var checkCount = 0;
+                var interval = setInterval(function() {
+                    checkCount++;
+                    if (window.i18n) {
+                        console.log('[DIAG] i18n.language:', window.i18n.language);
+                        console.log('[DIAG] i18n.languages:', window.i18n.languages);
+                        console.log('[DIAG] i18n.isInitialized:', window.i18n.isInitialized);
+                        clearInterval(interval);
+                    } else if (checkCount > 30) {
+                        console.log('[DIAG] i18n not found after 15 seconds');
+                        clearInterval(interval);
+                    }
+                }, 500);
+            })();
+        </script>
+@yield('assets')
 
         @include('layouts.scripts')
     </head>

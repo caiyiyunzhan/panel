@@ -438,4 +438,5 @@ return [
     "select_location" => "选择地区...",
     "select_host" => "选择数据库主机...",
     "no_results" => "没有结果。",
+    "settings_env_notice" => "您的面板当前配置为仅从环境变量读取设置。需要设置 APP_ENVIRONMENT_ONLY=false 才能动态加载设置。",
 ];

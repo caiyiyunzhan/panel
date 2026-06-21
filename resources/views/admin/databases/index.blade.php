@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    Database Hosts
+    {{ __("admin.database_hosts") }}
 @endsection
 
 @section('content-header')
-    <h1>Database Hosts<small>Database hosts that servers can have databases created on.</small></h1>
+    <h1>{{ __("admin.database_hosts") }}<small>Database hosts that servers can have databases created on.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li class="active">Database Hosts</li>
+        <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
+        <li class="active">{{ __("admin.database_hosts") }}</li>
     </ol>
 @endsection
 
@@ -31,7 +31,7 @@
                             <th>Host</th>
                             <th>Port</th>
                             <th>Username</th>
-                            <th class="text-center">Databases</th>
+                            <th class="text-center">{{ __("admin.databases") }}</th>
                             <th class="text-center">Node</th>
                         </tr>
                         @foreach ($hosts as $host)

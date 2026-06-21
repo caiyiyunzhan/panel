@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    New Nest
+    {{ __("admin.create_nest") }}
 @endsection
 
 @section('content-header')
     <h1>{{ __('admin.new_nest') }}<small>Configure a new nest to deploy to all nodes.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">{{ __('admin.admin_label') }}</a></li>
-        <li><a href="{{ route('admin.nests') }}">Nests</a></li>
+        <li><a href="{{ route('admin.nests') }}">{{ __("admin.nests") }}</a></li>
         <li class="active">New</li>
     </ol>
 @endsection

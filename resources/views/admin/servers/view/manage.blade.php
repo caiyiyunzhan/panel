@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('title')
-    Server — {{ $server->name }}: Manage
+    Server — {{ $server->name }}: {{ __("admin.server_management") }}
 @endsection
 
 @section('content-header')
-    <h1>{{ $server->name }}<small>Additional actions to control this server.</small></h1>
+    <h1>{{ $server->name }}<small>{{ __("admin.server_management_desc") }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Admin</a></li>
         <li><a href="{{ route('admin.servers') }}">Servers</a></li>
@@ -20,7 +20,7 @@
         <div class="col-sm-4">
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Reinstall Server</h3>
+                    <h3 class="box-title">{{ __("admin.reinstall_server") }}</h3>
                 </div>
                 <div class="box-body">
                     <p>This will reinstall the server with the assigned service scripts. <strong>Danger!</strong> This could overwrite server data.</p>
@@ -29,7 +29,7 @@
                     @if($server->isInstalled())
                         <form action="{{ route('admin.servers.view.manage.reinstall', $server->id) }}" method="POST">
                             {!! csrf_field() !!}
-                            <button type="submit" class="btn btn-danger">Reinstall Server</button>
+                            <button type="submit" class="btn btn-danger">{{ __("admin.reinstall_server") }}</button>
                         </form>
                     @else
                         <button class="btn btn-danger disabled">Server Must Install Properly to Reinstall</button>
@@ -58,7 +58,7 @@
             <div class="col-sm-4">
                 <div class="box box-warning">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Suspend Server</h3>
+                        <h3 class="box-title">{{ __("admin.suspend_server") }}</h3>
                     </div>
                     <div class="box-body">
                         <p>This will suspend the server, stop any running processes, and immediately block the user from being able to access their files or otherwise manage the server through the panel or API.</p>
@@ -67,7 +67,7 @@
                         <form action="{{ route('admin.servers.view.manage.suspension', $server->id) }}" method="POST">
                             {!! csrf_field() !!}
                             <input type="hidden" name="action" value="suspend" />
-                            <button type="submit" class="btn btn-warning @if(! is_null($server->transfer)) disabled @endif">Suspend Server</button>
+                            <button type="submit" class="btn btn-warning @if(! is_null($server->transfer)) disabled @endif">{{ __("admin.suspend_server") }}</button>
                         </form>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
             <div class="col-sm-4">
                 <div class="box box-success">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Unsuspend Server</h3>
+                        <h3 class="box-title">{{ __("admin.unsuspend_server") }}</h3>
                     </div>
                     <div class="box-body">
                         <p>This will unsuspend the server and restore normal user access.</p>
@@ -85,7 +85,7 @@
                         <form action="{{ route('admin.servers.view.manage.suspension', $server->id) }}" method="POST">
                             {!! csrf_field() !!}
                             <input type="hidden" name="action" value="unsuspend" />
-                            <button type="submit" class="btn btn-success">Unsuspend Server</button>
+                            <button type="submit" class="btn btn-success">{{ __("admin.unsuspend_server") }}</button>
                         </form>
                     </div>
                 </div>
@@ -96,21 +96,21 @@
             <div class="col-sm-4">
                 <div class="box box-success">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Transfer Server</h3>
+                        <h3 class="box-title">{{ __("admin.transfer_server") }}</h3>
                     </div>
                     <div class="box-body">
                         <p>
-                            Transfer this server to another node connected to this panel.
+                            {{ __("admin.transfer") }} this server to another node connected to this panel.
                             <strong>Warning!</strong> This feature has not been fully tested and may have bugs.
                         </p>
                     </div>
 
                     <div class="box-footer">
-                        @if($canTransfer)
-                            <button class="btn btn-success" data-toggle="modal" data-target="#transferServerModal">Transfer Server</button>
+                        @if($can{{ __("admin.transfer") }})
+                            <button class="btn btn-success" data-toggle="modal" data-target="#transferServerModal">{{ __("admin.transfer_server") }}</button>
                         @else
-                            <button class="btn btn-success disabled">Transfer Server</button>
-                            <p style="padding-top: 1rem;">Transferring a server requires more than one node to be configured on your panel.</p>
+                            <button class="btn btn-success disabled">{{ __("admin.transfer_server") }}</button>
+                            <p style="padding-top: 1rem;">{{ __("admin.transfer") }}ring a server requires more than one node to be configured on your panel.</p>
                         @endif
                     </div>
                 </div>
@@ -119,17 +119,17 @@
             <div class="col-sm-4">
                 <div class="box box-success">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Transfer Server</h3>
+                        <h3 class="box-title">{{ __("admin.transfer_server") }}</h3>
                     </div>
                     <div class="box-body">
                         <p>
                             This server is currently being transferred to another node.
-                            Transfer was initiated at <strong>{{ $server->transfer->created_at }}</strong>
+                            {{ __("admin.transfer") }} was initiated at <strong>{{ $server->transfer->created_at }}</strong>
                         </p>
                     </div>
 
                     <div class="box-footer">
-                        <button class="btn btn-success disabled">Transfer Server</button>
+                        <button class="btn btn-success disabled">{{ __("admin.transfer_server") }}</button>
                     </div>
                 </div>
             </div>
@@ -142,7 +142,7 @@
                 <form action="{{ route('admin.servers.view.manage.transfer', $server->id) }}" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Transfer Server</h4>
+                        <h4 class="modal-title">{{ __("admin.transfer_server") }}</h4>
                     </div>
 
                     <div class="modal-body">
@@ -196,7 +196,7 @@
     @parent
     {!! Theme::js('vendor/lodash/lodash.js') !!}
 
-    @if($canTransfer)
+    @if($can{{ __("admin.transfer") }})
         {!! Theme::js('js/admin/server/transfer.js') !!}
     @endif
 @endsection
