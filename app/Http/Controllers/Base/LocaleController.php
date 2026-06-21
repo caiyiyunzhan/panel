@@ -17,18 +17,16 @@ class LocaleController extends Controller
         $this->loader = $translator->getLoader();
     }
 
-    /**
-     * Returns translation data given a specific locale and namespace.
-     * Supports multi-namespace loading with "+" separator (e.g., "auth+strings").
-     * Also handles spaces (PHP converts + to space in query strings).
-     */
     public function __invoke(LocaleRequest $request): JsonResponse
     {
         $locale = $request->input('locale');
         $namespace = $request->input('namespace');
 
+        // Debug: write to a log file directly
+        $logMsg = date('Y-m-d H:i:s') . " | locale=$locale | ns=$namespace | ip=" . $request->ip() . PHP_EOL;
+        file_put_contents('/app/storage/logs/locale-debug.log', $logMsg, FILE_APPEND);
+
         // PHP decodes "+" to space in query strings.
-        // Convert spaces back to "+" then split, supporting both formats.
         $namespace = str_replace(' ', '+', $namespace);
         $namespaces = explode('+', $namespace);
         $response = [];
@@ -48,11 +46,6 @@ class LocaleController extends Controller
         ]);
     }
 
-    /**
-     * Convert standard Laravel translation keys that look like ":foo"
-     * into key structures that are supported by the front-end i18n
-     * library, like "{{foo}}".
-     */
     protected function i18n(array $data): array
     {
         foreach ($data as $key => $value) {
