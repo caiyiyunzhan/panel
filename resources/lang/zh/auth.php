@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
     "sign_in" => "登录",
