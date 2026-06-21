@@ -118,5 +118,6 @@ return [
     "enter_file_name" => "输入文件名",
     "enter_folder_name" => "输入文件夹名",
     "chmod_file" => "修改文件权限",
+    "active" => "活跃","inactive" => "停用","processing" => "处理中","last_run" => "上次运行","next_run" => "下次运行","na" => "无","cron_minute" => "分钟","cron_hour" => "小时","cron_day_month" => "日(月)","cron_month" => "月","cron_day_week" => "日(周)",
     "chmod_description" => "输入此文件的新权限。",
 ];

@@ -118,5 +118,6 @@ return [
     "enter_file_name" => "Enter a file name",
     "enter_folder_name" => "Enter a folder name",
     "chmod_file" => "Change File Permissions",
+    "active" => "Active","inactive" => "Inactive","processing" => "Processing","last_run" => "Last run at","next_run" => "Next run at","na" => "n/a","cron_minute" => "Minute","cron_hour" => "Hour","cron_day_month" => "Day (Month)","cron_month" => "Month","cron_day_week" => "Day (Week)",
     "chmod_description" => "Enter the new permissions for this file.",
 ];
