@@ -14,6 +14,9 @@ i18n.use(I18NextMultiloadBackendAdapter)
         debug: true,
         lng: "zh",
         fallbackLng: "zh",
+        supportedLngs: ["zh", "en"],
+        nonExplicitSupportedLngs: true,
+        load: "languageOnly",
         keySeparator: ".",
         backend: {
             backend: I18NextHttpBackend,
@@ -29,5 +32,19 @@ i18n.use(I18NextMultiloadBackendAdapter)
             escapeValue: false,
         },
     });
+
+// Force Chinese language on initialization
+i18n.on("initialized", () => {
+    if (i18n.language !== "zh") {
+        console.warn("[i18n] Language is not zh, it is:", i18n.language, ". Forcing to zh...");
+        i18n.changeLanguage("zh");
+    }
+    console.log("[i18n] Initialized with language:", i18n.language, "| languages:", i18n.languages);
+});
+
+// Also listen for language changes
+i18n.on("languageChanged", (lng) => {
+    console.log("[i18n] Language changed to:", lng);
+});
 
 export default i18n;
