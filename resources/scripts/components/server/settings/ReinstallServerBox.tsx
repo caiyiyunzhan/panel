@@ -23,7 +23,7 @@ export default () => {
                 addFlash({
                     key: "settings",
                     type: "success",
-                    message: "Your server has begun the reinstallation process.",
+                    message: t("reinstall_started"),
                 });
             })
             .catch((error) => {
@@ -50,11 +50,9 @@ export default () => {
                 {t("reinstall_server_desc")}
             </Dialog.Confirm>
             <p css={tw`text-sm`}>
-                Reinstalling your server will stop it, and then re-run the installation script that initially set it
-                up.&nbsp;
+                {t("reinstall_server_info")}&nbsp;
                 <strong css={tw`font-medium`}>
-                    Some files may be deleted or modified during this process, please back up your data before
-                    continuing.
+                    {t("reinstall_server_warning")}
                 </strong>
             </p>
             <div css={tw`mt-6 text-right`}>

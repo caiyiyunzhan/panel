@@ -1,18 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
-import Spinner from '@/components/elements/Spinner';
-import useFlash from '@/plugins/useFlash';
-import Can from '@/components/elements/Can';
-import CreateBackupButton from '@/components/server/backups/CreateBackupButton';
-import FlashMessageRender from '@/components/FlashMessageRender';
-import BackupRow from '@/components/server/backups/BackupRow';
-import tw from 'twin.macro';
-import { useTranslation } from 'react-i18next';
-import getServerBackups, { Context as ServerBackupContext } from '@/api/swr/getServerBackups';
-import { ServerContext } from '@/state/server';
-import ServerContentBlock from '@/components/elements/ServerContentBlock';
-import Pagination from '@/components/elements/Pagination';
+import React, { useContext, useEffect, useState } from "react";
+import Spinner from "@/components/elements/Spinner";
+import useFlash from "@/plugins/useFlash";
+import Can from "@/components/elements/Can";
+import CreateBackupButton from "@/components/server/backups/CreateBackupButton";
+import FlashMessageRender from "@/components/FlashMessageRender";
+import BackupRow from "@/components/server/backups/BackupRow";
+import tw from "twin.macro";
+import { useTranslation } from "react-i18next";
+import getServerBackups, { Context as ServerBackupContext } from "@/api/swr/getServerBackups";
+import { ServerContext } from "@/state/server";
+import ServerContentBlock from "@/components/elements/ServerContentBlock";
+import Pagination from "@/components/elements/Pagination";
 
 const BackupContainer = () => {
+    const { t } = useTranslation("server");
     const { page, setPage } = useContext(ServerBackupContext);
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const { data: backups, error, isValidating } = getServerBackups();
@@ -21,31 +22,29 @@ const BackupContainer = () => {
 
     useEffect(() => {
         if (!error) {
-            clearFlashes('backups');
+            clearFlashes("backups");
 
             return;
         }
 
-        clearAndAddHttpError({ error, key: 'backups' });
+        clearAndAddHttpError({ error, key: "backups" });
     }, [error]);
 
     if (!backups || (error && isValidating)) {
-        return <Spinner size={'large'} centered />;
+        return <Spinner size={"large"} centered />;
     }
 
     return (
-        <ServerContentBlock title={t('backups')}>
-            <FlashMessageRender byKey={'backups'} css={tw`mb-4`} />
+        <ServerContentBlock title={t("backups")}>
+            <FlashMessageRender byKey={"backups"} css={tw`mb-4`} />
             <Pagination data={backups} onPageSelect={setPage}>
                 {({ items }) =>
                     !items.length ? (
-                        // Don't show any error messages if the server has no backups and the user cannot
-                        // create additional ones for the server.
                         !backupLimit ? null : (
                             <p css={tw`text-center text-sm text-neutral-300`}>
                                 {page > 1
-                                    ? "Looks like we've run out of backups to show you, try going back a page."
-                                    : 'It looks like there are no backups currently stored for this server.'}
+                                    ? t("backups_no_more_pages")
+                                    : t("backups_none_stored")}
                             </p>
                         )
                     ) : (
@@ -57,14 +56,14 @@ const BackupContainer = () => {
             </Pagination>
             {backupLimit === 0 && (
                 <p css={tw`text-center text-sm text-neutral-300`}>
-                    Backups cannot be created for this server because the backup limit is set to 0.
+                    {t("backups_limit_zero")}
                 </p>
             )}
-            <Can action={'backup.create'}>
+            <Can action={"backup.create"}>
                 <div css={tw`mt-6 sm:flex items-center justify-end`}>
                     {backupLimit > 0 && backups.backupCount > 0 && (
                         <p css={tw`text-sm text-neutral-300 mb-4 sm:mr-6 sm:mb-0`}>
-                            {backups.backupCount} of {backupLimit} backups have been created for this server.
+                            {t("backups_count_of", { count: backups.backupCount, limit: backupLimit })}
                         </p>
                     )}
                     {backupLimit > 0 && backupLimit > backups.backupCount && (
@@ -77,7 +76,6 @@ const BackupContainer = () => {
 };
 
 export default () => {
-    const { t } = useTranslation('server');
     const [page, setPage] = useState<number>(1);
     return (
         <ServerBackupContext.Provider value={{ page, setPage }}>

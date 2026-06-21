@@ -73,6 +73,6 @@ const DisableTOTPDialog = () => {
 };
 
 export default asDialog({
-    title: "Disable Two-Step Verification",
-    description: "Disabling two-step verification will make your account less secure.",
+    title: "禁用两步验证",
+    description: "禁用两步验证将降低您账户的安全性。",
 })(DisableTOTPDialog);

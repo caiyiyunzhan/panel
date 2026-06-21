@@ -128,6 +128,6 @@ const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
 };
 
 export default asDialog({
-    title: "Enable Two-Step Verification",
-    description: "Help protect your account from unauthorized access. You'll be prompted for a verification code each time you sign in.",
+    title: "启用两步验证",
+    description: "保护您的账户免受未经授权的访问。每次登录时系统会提示您输入验证码。",
 })(ConfigureTwoFactorForm);

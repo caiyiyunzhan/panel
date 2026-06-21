@@ -187,6 +187,11 @@ return [
     "restore_in_progress" => "恢复进行中",
     "backup_completed" => "备份已完成",
     "backup_failed" => "备份失败",
+    "backups_no_more_pages" => "没有更多备份了，请返回上一页。",
+    "backups_none_stored" => "此服务器当前没有存储任何备份。",
+    "backups_limit_zero" => "备份限制为0，无法为此服务器创建备份。",
+    "backups_count_of" => "已为此服务器创建 :count/:limit 个备份。",
+
     "restore_completed" => "恢复已完成",
     "restore_failed" => "恢复失败",
 
@@ -211,4 +216,9 @@ return [
     "server_users" => "用户管理",
     "server_backups" => "备份管理",
     "server_network" => "网络管理",
+    // === Reinstall & Schedule additions ===
+    "never" => "从未",
+    "reinstall_started" => "您的服务器已开始重装流程。",
+    "reinstall_server_info" => "重装服务器会先停止服务器，然后重新运行初始安装脚本。",
+    "reinstall_server_warning" => "此过程中部分文件可能会被删除或修改，请在继续前备份您的数据。",
 ];
