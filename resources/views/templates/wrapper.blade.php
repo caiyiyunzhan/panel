@@ -128,7 +128,8 @@ setTimeout(function() { clearInterval(checkI18n); if (window.__DIAG.i18nStatus =
             @yield('container')
             @yield('below-container')
         @show
-        @section('scripts')
+        @include('partials.i18n-preload')
+@section('scripts')
             {!! $asset->js('main.js') !!}
         @show
     </body>
