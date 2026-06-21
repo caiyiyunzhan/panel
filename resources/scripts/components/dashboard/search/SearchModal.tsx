@@ -47,7 +47,7 @@ const SearchWatcher = () => {
 };
 
 export default ({ ...props }: Props) => {
-    const { t } = useTranslation("strings");: Props) => {
+    const { t } = useTranslation("strings");
     const ref = useRef<HTMLInputElement>(null);
     const isAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const [servers, setServers] = useState<Server[]>([]);

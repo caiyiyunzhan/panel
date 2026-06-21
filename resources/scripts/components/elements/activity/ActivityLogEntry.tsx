@@ -40,7 +40,7 @@ function wrapProperties(value: unknown): any {
 }
 
 export default ({ activity, children }: Props) => {
-    const { t } = useTranslation("strings");: Props) => {
+    const { t } = useTranslation("strings");
     const { pathTo } = useLocationHash();
     const actor = activity.relationships.actor;
     const properties = wrapProperties(activity.properties);
