@@ -10,6 +10,7 @@ import GreyRowBox from '@/components/elements/GreyRowBox';
 import Spinner from '@/components/elements/Spinner';
 import styled from 'styled-components/macro';
 import isEqual from 'react-fast-compare';
+import { useTranslation } from 'react-i18next';
 
 // Determines if the current value is in an alarm threshold so we can show it in red rather
 // than the more faded default style.
@@ -51,7 +52,8 @@ type Timer = ReturnType<typeof setInterval>;
 
 export default ({ server, className }: { server: Server; className?: string }) => {
     const interval = useRef<Timer>(null) as React.MutableRefObject<Timer>;
-    const [isSuspended, setIsSuspended] = useState(server.status === 'suspended');
+    const [isSuspended, setIsSuspended] = useState(server.status === t('suspended'));
+    const { t } = useTranslation('dashboard');
     const [stats, setStats] = useState<ServerStats | null>(null);
 
     const getStats = () =>
@@ -60,7 +62,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
             .catch((error) => console.error(error));
 
     useEffect(() => {
-        setIsSuspended(stats?.isSuspended || server.status === 'suspended');
+        setIsSuspended(stats?.isSuspended || server.status === t('suspended'));
     }, [stats?.isSuspended, server.status]);
 
     useEffect(() => {
@@ -120,7 +122,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     isSuspended ? (
                         <div css={tw`flex-1 text-center`}>
                             <span css={tw`bg-red-500 rounded px-2 py-1 text-red-100 text-xs`}>
-                                {server.status === 'suspended' ? 'Suspended' : 'Connection Error'}
+                                {server.status === t('suspended') ? t('suspended') : t('connection_error')}
                             </span>
                         </div>
                     ) : server.isNodeUnderMaintenance ? (
@@ -133,12 +135,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                         <div css={tw`flex-1 text-center`}>
                             <span css={tw`bg-neutral-500 rounded px-2 py-1 text-neutral-100 text-xs`}>
                                 {server.isTransferring
-                                    ? 'Transferring'
-                                    : server.status === 'installing'
-                                    ? 'Installing'
+                                    ? t('transferring')
+                                    : server.status === t('installing')
+                                    ? t('installing')
                                     : server.status === 'restoring_backup'
-                                    ? 'Restoring Backup'
-                                    : 'Unavailable'}
+                                    ? t('restoring_backup')
+                                    : t('unavailable')}
                             </span>
                         </div>
                     ) : (
@@ -153,7 +155,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {stats.cpuUsagePercent.toFixed(2)} %
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>of {cpuLimit}</p>
+                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>t('of') + ' ' + {cpuLimit}</p>
                         </div>
                         <div css={tw`flex-1 ml-4 sm:block hidden`}>
                             <div css={tw`flex justify-center`}>
@@ -162,7 +164,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {bytesToString(stats.memoryUsageInBytes)}
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>of {memoryLimit}</p>
+                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>t('of') + ' ' + {memoryLimit}</p>
                         </div>
                         <div css={tw`flex-1 ml-4 sm:block hidden`}>
                             <div css={tw`flex justify-center`}>
@@ -171,7 +173,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {bytesToString(stats.diskUsageInBytes)}
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>of {diskLimit}</p>
+                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>t('of') + ' ' + {diskLimit}</p>
                         </div>
                     </React.Fragment>
                 )}

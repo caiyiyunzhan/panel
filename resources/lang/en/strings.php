@@ -84,6 +84,11 @@ return [
     "update" => "Update",
     "confirm" => "Confirm",
     "description" => "Description",
+    "something_went_wrong" => "Something went wrong",
+    "not_found" => "The requested resource was not found.",
+    "page_not_found" => "404",
+    "app_error" => "An error was encountered by the application while rendering this view. Try refreshing the page.",
+    "copyright" => "&copy; 2015 - :year Pterodactyl Software",
     "days" => [
         "sun" => "Sunday",
         "mon" => "Monday",
@@ -97,5 +102,4 @@ return [
     "enable" => "Enable",
     "disable" => "Disable",
     "save" => "Save",
-    "copyright" => "&copy; 2015 - :year Pterodactyl Software",
 ];

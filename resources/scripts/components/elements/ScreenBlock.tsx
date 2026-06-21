@@ -1,12 +1,13 @@
-import React from 'react';
-import PageContentBlock from '@/components/elements/PageContentBlock';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
-import styled, { keyframes } from 'styled-components/macro';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
-import NotFoundSvg from '@/assets/images/not_found.svg';
-import ServerErrorSvg from '@/assets/images/server_error.svg';
+﻿import React from "react";
+import PageContentBlock from "@/components/elements/PageContentBlock";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faSyncAlt } from "@fortawesome/free-solid-svg-icons";
+import styled, { keyframes } from "styled-components/macro";
+import tw from "twin.macro";
+import Button from "@/components/elements/Button";
+import NotFoundSvg from "@/assets/images/not_found.svg";
+import ServerErrorSvg from "@/assets/images/server_error.svg";
+import { useTranslation } from "react-i18next";
 
 interface BaseProps {
     title: string;
@@ -46,11 +47,11 @@ const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProp
             <div
                 css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 bg-neutral-100 rounded-lg shadow-lg text-center relative`}
             >
-                {(typeof onBack === 'function' || typeof onRetry === 'function') && (
+                {(typeof onBack === "function" || typeof onRetry === "function") && (
                     <div css={tw`absolute left-0 top-0 ml-4 mt-4`}>
                         <ActionButton
                             onClick={() => (onRetry ? onRetry() : onBack ? onBack() : null)}
-                            className={onRetry ? 'hover:spin' : undefined}
+                            className={onRetry ? "hover:spin" : undefined}
                         >
                             <FontAwesomeIcon icon={onRetry ? faSyncAlt : faArrowLeft} />
                         </ActionButton>
@@ -64,22 +65,28 @@ const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProp
     </PageContentBlock>
 );
 
-type ServerErrorProps = (Omit<PropsWithBack, 'image' | 'title'> | Omit<PropsWithRetry, 'image' | 'title'>) & {
+type ServerErrorProps = (Omit<PropsWithBack, "image" | "title"> | Omit<PropsWithRetry, "image" | "title">) & {
     title?: string;
 };
 
-const ServerError = ({ title, ...props }: ServerErrorProps) => (
-    <ScreenBlock title={title || 'Something went wrong'} image={ServerErrorSvg} {...props} />
-);
+const ServerError = ({ title, ...props }: ServerErrorProps) => {
+    const { t } = useTranslation("strings");
 
-const NotFound = ({ title, message, onBack }: Partial<Pick<ScreenBlockProps, 'title' | 'message' | 'onBack'>>) => (
-    <ScreenBlock
-        title={title || '404'}
-        image={NotFoundSvg}
-        message={message || 'The requested resource was not found.'}
-        onBack={onBack}
-    />
-);
+    return <ScreenBlock title={title || t("something_went_wrong")} image={ServerErrorSvg} {...props} />;
+};
+
+const NotFound = ({ title, message, onBack }: Partial<Pick<ScreenBlockProps, "title" | "message" | "onBack">>) => {
+    const { t } = useTranslation("strings");
+
+    return (
+        <ScreenBlock
+            title={title || t("page_not_found")}
+            image={NotFoundSvg}
+            message={message || t("not_found")}
+            onBack={onBack}
+        />
+    );
+};
 
 export { ServerError, NotFound };
 export default ScreenBlock;

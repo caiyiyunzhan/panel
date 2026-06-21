@@ -84,6 +84,11 @@ return [
     "update" => "更新",
     "confirm" => "确认",
     "description" => "描述",
+    "something_went_wrong" => "出现了一些问题",
+    "not_found" => "请求的资源未找到。",
+    "page_not_found" => "404",
+    "app_error" => "应用程序渲染此视图时遇到错误，请尝试刷新页面。",
+    "copyright" => "&copy; 2015 - :year Pterodactyl Software",
     "days" => [
         "sun" => "周日",
         "mon" => "周一",
@@ -97,5 +102,4 @@ return [
     "enable" => "启用",
     "disable" => "禁用",
     "save" => "保存",
-    "copyright" => "&copy; 2015 - :year Pterodactyl Software",
 ];

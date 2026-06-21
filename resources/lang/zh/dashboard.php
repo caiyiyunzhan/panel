@@ -1,0 +1,22 @@
+﻿<?php
+
+return [
+    "title" => "仪表盘",
+    "showing_your_servers" => "显示您的服务器",
+    "showing_others_servers" => "显示他人服务器",
+    "no_servers" => "您的账户下没有关联的服务器。",
+    "no_other_servers" => "没有其他服务器可显示。",
+    "suspended" => "已暂停",
+    "connection_error" => "连接错误",
+    "under_maintenance" => "维护中",
+    "transferring" => "转移中",
+    "installing" => "安装中",
+    "restoring_backup" => "恢复备份中",
+    "unavailable" => "不可用",
+    "of" => "/",
+    "account_overview" => "账户概览",
+    "account_security" => "账户安全",
+    "api_credentials" => "API 凭证",
+    "ssh_keys" => "SSH 密钥",
+    "activity_log" => "活动日志",
+];
