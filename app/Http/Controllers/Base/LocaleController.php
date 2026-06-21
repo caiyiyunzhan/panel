@@ -20,13 +20,16 @@ class LocaleController extends Controller
     /**
      * Returns translation data given a specific locale and namespace.
      * Supports multi-namespace loading with "+" separator (e.g., "auth+strings").
+     * Also handles spaces (PHP converts + to space in query strings).
      */
     public function __invoke(LocaleRequest $request): JsonResponse
     {
         $locale = $request->input('locale');
         $namespace = $request->input('namespace');
 
-        // Split by "+" to support i18next-multiload-backend-adapter
+        // PHP decodes "+" to space in query strings.
+        // Convert spaces back to "+" then split, supporting both formats.
+        $namespace = str_replace(' ', '+', $namespace);
         $namespaces = explode('+', $namespace);
         $response = [];
 
