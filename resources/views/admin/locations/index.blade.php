@@ -7,7 +7,7 @@
 @section('content-header')
     <h1>Locations<small>All locations that nodes can be assigned to for easier categorization.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
+        <li><a href="{{ route('admin.index') }}">{{ __('admin.admin_label') }}</a></li>
         <li class="active">Locations</li>
     </ol>
 @endsection
@@ -17,20 +17,20 @@
     <div class="col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Location List</h3>
+                <h3 class="box-title">{{ __('admin.location_list') }}</h3>
                 <div class="box-tools">
-                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newLocationModal">Create New</button>
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newLocationModal">{{ __('admin.create_new') }}</button>
                 </div>
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
                     <tbody>
                         <tr>
-                            <th>ID</th>
+                            <th>{{ __('admin.id') }}</th>
                             <th>Short Code</th>
-                            <th>Description</th>
-                            <th class="text-center">Nodes</th>
-                            <th class="text-center">Servers</th>
+                            <th>{{ __('admin.description') }}</th>
+                            <th class="text-center">{{ __('admin.nodes') }}</th>
+                            <th class="text-center">{{ __('admin.servers') }}</th>
                         </tr>
                         @foreach ($locations as $location)
                             <tr>
@@ -63,7 +63,7 @@
                             <p class="text-muted small">A short identifier used to distinguish this location from others. Must be between 1 and 60 characters, for example, <code>us.nyc.lvl3</code>.</p>
                         </div>
                         <div class="col-md-12">
-                            <label for="pLongModal" class="form-label">Description</label>
+                            <label for="pLongModal" class="form-label">{{ __('admin.description') }}</label>
                             <textarea name="long" id="pLongModal" class="form-control" rows="4"></textarea>
                             <p class="text-muted small">A longer description of this location. Must be less than 191 characters.</p>
                         </div>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="modal-footer">
                     {!! csrf_field() !!}
-                    <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">{{ __('admin.cancel') }}</button>
                     <button type="submit" class="btn btn-success btn-sm">Create</button>
                 </div>
             </form>

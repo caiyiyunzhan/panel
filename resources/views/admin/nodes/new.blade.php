@@ -5,10 +5,10 @@
 @endsection
 
 @section('content-header')
-    <h1>New Node<small>Create a new local or remote node for servers to be installed to.</small></h1>
+    <h1>{{ __('admin.new_node') }}<small>Create a new local or remote node for servers to be installed to.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.nodes') }}">Nodes</a></li>
+        <li><a href="{{ route('admin.index') }}">{{ __('admin.admin_label') }}</a></li>
+        <li><a href="{{ route('admin.nodes') }}">{{ __('admin.nodes') }}</a></li>
         <li class="active">New</li>
     </ol>
 @endsection
@@ -23,12 +23,12 @@
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="pName" class="form-label">Name</label>
+                        <label for="pName" class="form-label">{{ __('admin.name') }}</label>
                         <input type="text" name="name" id="pName" class="form-control" value="{{ old('name') }}"/>
                         <p class="text-muted small">Character limits: <code>a-zA-Z0-9_.-</code> and <code>[Space]</code> (min 1, max 100 characters).</p>
                     </div>
                     <div class="form-group">
-                        <label for="pDescription" class="form-label">Description</label>
+                        <label for="pDescription" class="form-label">{{ __('admin.description') }}</label>
                         <textarea name="description" id="pDescription" rows="4" class="form-control">{{ old('description') }}</textarea>
                     </div>
                     <div class="form-group">

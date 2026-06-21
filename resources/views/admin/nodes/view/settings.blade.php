@@ -7,10 +7,10 @@
 @section('content-header')
     <h1>{{ $node->name }}<small>Configure your node settings.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.nodes') }}">Nodes</a></li>
+        <li><a href="{{ route('admin.index') }}">{{ __('admin.admin_label') }}</a></li>
+        <li><a href="{{ route('admin.nodes') }}">{{ __('admin.nodes') }}</a></li>
         <li><a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></li>
-        <li class="active">Settings</li>
+        <li class="active">{{ __('admin.settings') }}</li>
     </ol>
 @endsection
 
@@ -20,10 +20,10 @@
         <div class="nav-tabs-custom nav-tabs-floating">
             <ul class="nav nav-tabs">
                 <li><a href="{{ route('admin.nodes.view', $node->id) }}">About</a></li>
-                <li class="active"><a href="{{ route('admin.nodes.view.settings', $node->id) }}">Settings</a></li>
-                <li><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">Configuration</a></li>
+                <li class="active"><a href="{{ route('admin.nodes.view.settings', $node->id) }}">{{ __('admin.settings') }}</a></li>
+                <li><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">{{ __('admin.configuration') }}</a></li>
                 <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">Allocation</a></li>
-                <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">Servers</a></li>
+                <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">{{ __('admin.servers') }}</a></li>
             </ul>
         </div>
     </div>
@@ -33,7 +33,7 @@
         <div class="col-sm-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Settings</h3>
+                    <h3 class="box-title">{{ __('admin.settings') }}</h3>
                 </div>
                 <div class="box-body row">
                     <div class="form-group col-xs-12">
@@ -44,13 +44,13 @@
                         </div>
                     </div>
                     <div class="form-group col-xs-12">
-                        <label for="description" class="control-label">Description</label>
+                        <label for="description" class="control-label">{{ __('admin.description') }}</label>
                         <div>
                             <textarea name="description" id="description" rows="4" class="form-control">{{ $node->description }}</textarea>
                         </div>
                     </div>
                     <div class="form-group col-xs-12">
-                        <label for="name" class="control-label">Location</label>
+                        <label for="name" class="control-label">{{ __('admin.location') }}</label>
                         <div>
                             <select name="location_id" class="form-control">
                                 @foreach($locations as $location)

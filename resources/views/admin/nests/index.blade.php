@@ -5,10 +5,10 @@
 @endsection
 
 @section('content-header')
-    <h1>Nests<small>All nests currently available on this system.</small></h1>
+    <h1>{{ __('admin.nests_title') }}<small>{{ __('admin.all_nests') }}</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li class="active">Nests</li>
+        <li><a href="{{ route('admin.index') }}">{{ __('admin.admin_label') }}</a></li>
+        <li class="active">{{ __('admin.nests_title') }}</li>
     </ol>
 @endsection
 
@@ -24,20 +24,20 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Configured Nests</h3>
+                <h3 class="box-title">{{ __('admin.configured_nests') }}</h3>
                 <div class="box-tools">
                     <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#importServiceOptionModal" role="button"><i class="fa fa-upload"></i> Import Egg</a>
-                    <a href="{{ route('admin.nests.new') }}" class="btn btn-primary btn-sm">Create New</a>
+                    <a href="{{ route('admin.nests.new') }}" class="btn btn-primary btn-sm">{{ __('admin.create_new') }}</a>
                 </div>
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th class="text-center">Eggs</th>
-                        <th class="text-center">Servers</th>
+                        <th>{{ __('admin.id') }}</th>
+                        <th>{{ __('admin.name') }}</th>
+                        <th>{{ __('admin.description') }}</th>
+                        <th class="text-center">{{ __('admin.eggs') }}</th>
+                        <th class="text-center">{{ __('admin.servers') }}</th>
                     </tr>
                     @foreach($nests as $nest)
                         <tr>
@@ -58,7 +58,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Import an Egg</h4>
+                <h4 class="modal-title">{{ __('admin.import_egg_title') }}</h4>
             </div>
             <form action="{{ route('admin.nests.egg.import') }}" enctype="multipart/form-data" method="POST">
                 <div class="modal-body">
@@ -83,8 +83,8 @@
                 </div>
                 <div class="modal-footer">
                     {{ csrf_field() }}
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Import</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('admin.cancel') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ __('admin.import') }}</button>
                 </div>
             </form>
         </div>

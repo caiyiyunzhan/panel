@@ -7,10 +7,10 @@
 @section('content-header')
     <h1>{{ $node->name }}<small>Your daemon configuration file.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.nodes') }}">Nodes</a></li>
+        <li><a href="{{ route('admin.index') }}">{{ __('admin.admin_label') }}</a></li>
+        <li><a href="{{ route('admin.nodes') }}">{{ __('admin.nodes') }}</a></li>
         <li><a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></li>
-        <li class="active">Configuration</li>
+        <li class="active">{{ __('admin.configuration') }}</li>
     </ol>
 @endsection
 
@@ -20,10 +20,10 @@
         <div class="nav-tabs-custom nav-tabs-floating">
             <ul class="nav nav-tabs">
                 <li><a href="{{ route('admin.nodes.view', $node->id) }}">About</a></li>
-                <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">Settings</a></li>
-                <li class="active"><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">Configuration</a></li>
+                <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">{{ __('admin.settings') }}</a></li>
+                <li class="active"><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">{{ __('admin.configuration') }}</a></li>
                 <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">Allocation</a></li>
-                <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">Servers</a></li>
+                <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">{{ __('admin.servers') }}</a></li>
             </ul>
         </div>
     </div>
@@ -45,7 +45,7 @@
     <div class="col-sm-4">
         <div class="box box-success">
             <div class="box-header with-border">
-                <h3 class="box-title">Auto-Deploy</h3>
+                <h3 class="box-title">{{ __('admin.auto_deploy') }}</h3>
             </div>
             <div class="box-body">
                 <p class="text-muted small">
