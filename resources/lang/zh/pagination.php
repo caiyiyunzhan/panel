@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
     'previous' => '&laquo; 上一页',

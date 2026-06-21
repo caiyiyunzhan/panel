@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
     'daemon_connection_failed' => '尝试与守护进程通信时出现异常，返回 HTTP/:code 响应码。此异常已记录。',

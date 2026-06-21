@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
     'header' => '服务器列表',

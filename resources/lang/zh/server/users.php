@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
     'title' => '管理子用户',

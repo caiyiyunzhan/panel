@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
     'accepted' => ':attribute 必须被接受。',

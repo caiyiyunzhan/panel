@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
     'email' => '邮箱',

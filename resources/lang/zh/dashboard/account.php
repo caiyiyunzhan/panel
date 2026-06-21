@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
     'header' => '账户概览',
