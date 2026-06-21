@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import { Subuser } from '@/state/server/subusers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt, faUnlockAlt, faUserLock } from '@fortawesome/free-solid-svg-icons';
-import RemoveSubuserButton from '@/components/server/users/RemoveSubuserButton';
-import EditSubuserModal from '@/components/server/users/EditSubuserModal';
-import Can from '@/components/elements/Can';
-import { useStoreState } from 'easy-peasy';
-import tw from 'twin.macro';
-import GreyRowBox from '@/components/elements/GreyRowBox';
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Subuser } from "@/state/server/subusers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt, faUnlockAlt, faUserLock } from "@fortawesome/free-solid-svg-icons";
+import RemoveSubuserButton from "@/components/server/users/RemoveSubuserButton";
+import EditSubuserModal from "@/components/server/users/EditSubuserModal";
+import Can from "@/components/elements/Can";
+import { useStoreState } from "easy-peasy";
+import tw from "twin.macro";
+import GreyRowBox from "@/components/elements/GreyRowBox";
 
 interface Props {
     subuser: Subuser;
 }
 
-export default ({
-    subuser }: Props) => {
+export default ({ subuser }: Props) => {
     const { t } = useTranslation("server");
     const uuid = useStoreState((state) => state.user!.data!.uuid);
     const [visible, setVisible] = useState(false);
@@ -39,19 +38,19 @@ export default ({
                     />
                     &nbsp;
                 </p>
-                <p css={tw`text-2xs text-neutral-500 uppercase hidden md:block`}>2FA Enabled</p>
+                <p css={tw`text-2xs text-neutral-500 uppercase hidden md:block`}>{t("2fa_enabled")}</p>
             </div>
             <div css={tw`ml-4 hidden md:block`}>
                 <p css={tw`font-medium text-center`}>
-                    {subuser.permissions.filter((permission) => permission !== 'websocket.connect').length}
+                    {subuser.permissions.filter((permission) => permission !== "websocket.connect").length}
                 </p>
-                <p css={tw`text-2xs text-neutral-500 uppercase`}>Permissions</p>
+                <p css={tw`text-2xs text-neutral-500 uppercase`}>{t("permissions")}</p>
             </div>
             {subuser.uuid !== uuid && (
                 <>
-                    <Can action={'user.update'}>
+                    <Can action={"user.update"}>
                         <button
-                            type={'button'}
+                            type={"button"}
                             aria-label={t("edit_subuser")}
                             css={tw`block text-sm p-1 md:p-2 text-neutral-500 hover:text-neutral-100 transition-colors duration-150 mx-4`}
                             onClick={() => setVisible(true)}
@@ -59,7 +58,7 @@ export default ({
                             <FontAwesomeIcon icon={faPencilAlt} />
                         </button>
                     </Can>
-                    <Can action={'user.delete'}>
+                    <Can action={"user.delete"}>
                         <RemoveSubuserButton subuser={subuser} />
                     </Can>
                 </>

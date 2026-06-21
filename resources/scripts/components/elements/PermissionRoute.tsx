@@ -1,11 +1,11 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { RouteProps } from 'react-router';
-import Can from '@/components/elements/Can';
-import { ServerError } from '@/components/elements/ScreenBlock';
+import { Route } from "react-router-dom";
+import { RouteProps } from "react-router";
+import Can from "@/components/elements/Can";
+import { ServerError } from "@/components/elements/ScreenBlock";
 
-interface Props extends Omit<RouteProps, 'path'> {
+interface Props extends Omit<RouteProps, "path"> {
     path: string;
     permission: string | string[] | null;
 }
@@ -21,7 +21,7 @@ export default ({ permission, children, ...props }: Props) => {
                     matchAny
                     action={permission}
                     renderOnError={
-                        <ServerError title={t("access_denied")} message={'You do not have permission to access this page.'} />
+                        <ServerError title={t("access_denied")} message={"You do not have permission to access this page."} />
                     }
                 >
                     {children}
