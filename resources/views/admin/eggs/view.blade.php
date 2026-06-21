@@ -37,7 +37,7 @@
                                 <label for="pName" class="control-label">{{ __("admin.egg_file") }}</label>
                                 <div>
                                     <input type="file" name="import_file" class="form-control" style="border: 0;margin-left:-10px;" />
-                                    <p class="text-muted small no-margin-bottom">If you would like to replace settings for this Egg by uploading a new JSON file, simply select it here and press "Update Egg". This will not change any existing startup strings or Docker images for existing servers.</p>
+                                    <p class="text-muted small no-margin-bottom">{{ __("admin.egg_import_file_help") }}</p>
                                 </div>
                             </div>
                         </div>
@@ -64,41 +64,28 @@
                             <div class="form-group">
                                 <label for="pName" class="control-label">{{ __("admin.name") }} <span class="field-required"></span></label>
                                 <input type="text" id="pName" name="name" value="{{ $egg->name }}" class="form-control" />
-                                <p class="text-muted small">A simple, human-readable name to use as an identifier for this Egg.</p>
+                                <p class="text-muted small">{{ __("admin.egg_name_help") }}</p>
                             </div>
                             <div class="form-group">
                                 <label for="pUuid" class="control-label">{{ __("admin.uuid") }}</label>
                                 <input type="text" id="pUuid" readonly value="{{ $egg->uuid }}" class="form-control" />
-                                <p class="text-muted small">This is the globally unique identifier for this Egg which the Daemon uses as an identifier.</p>
+                                <p class="text-muted small">{{ __("admin.egg_uuid_help") }}</p>
                             </div>
                             <div class="form-group">
                                 <label for="pAuthor" class="control-label">{{ __("admin.author") }}</label>
                                 <input type="text" id="pAuthor" readonly value="{{ $egg->author }}" class="form-control" />
-                                <p class="text-muted small">The author of this version of the Egg. Uploading a new Egg configuration from a different author will change this.</p>
+                                <p class="text-muted small">{{ __("admin.egg_author_help") }}</p>
                             </div>
                             <div class="form-group">
                                 <label for="pDockerImage" class="control-label">{{ __("admin.docker_images") }} <span class="field-required"></span></label>
                                 <textarea id="pDockerImages" name="docker_images" class="form-control" rows="4">{{ implode(PHP_EOL, $images) }}</textarea>
-                                <p class="text-muted small">
-                                    The docker images available to servers using this egg. Enter one per line. Users
-                                    will be able to select from this list of images if more than one value is provided.
-                                    Optionally, a display name may be provided by prefixing the image with the name
-                                    followed by a pipe character, and then the image URL. Example: <code>Display Name|ghcr.io/my/egg</code>
-                                </p>
+                                <p class="text-muted small">{!! __("admin.egg_docker_images_help_extended") !!}</p>
                             </div>
                             <div class="form-group">
                                 <div class="checkbox checkbox-primary no-margin-bottom">
                                     <input id="pForceOutgoingIp" name="force_outgoing_ip" type="checkbox" value="1" @if($egg->force_outgoing_ip) checked @endif />
                                     <label for="pForceOutgoingIp" class="strong">{{ __("admin.force_outgoing_ip") }}</label>
-                                    <p class="text-muted small">
-                                        Forces all outgoing network traffic to have its Source IP NATed to the IP of the server's primary allocation IP.
-                                        Required for certain games to work properly when the Node has multiple public IP addresses.
-                                        <br>
-                                        <strong>
-                                            Enabling this option will disable internal networking for any servers using this egg,
-                                            causing them to be unable to internally access other servers on the same node.
-                                        </strong>
-                                    </p>
+                                    <p class="text-muted small">{!! __("admin.egg_force_outgoing_ip_help") !!}</p>
                                 </div>
                             </div>
 
@@ -107,12 +94,12 @@
                             <div class="form-group">
                                 <label for="pDescription" class="control-label">{{ __("admin.description") }}</label>
                                 <textarea id="pDescription" name="description" class="form-control" rows="8">{{ $egg->description }}</textarea>
-                                <p class="text-muted small">A description of this Egg that will be displayed throughout the Panel as needed.</p>
+                                <p class="text-muted small">{{ __("admin.egg_description_help_extended") }}</p>
                             </div>
                             <div class="form-group">
                                 <label for="pStartup" class="control-label">Startup Command <span class="field-required"></span></label>
                                 <textarea id="pStartup" name="startup" class="form-control" rows="8">{{ $egg->startup }}</textarea>
-                                <p class="text-muted small">The default startup command that should be used for new servers using this Egg.</p>
+                                <p class="text-muted small">{{ __("admin.egg_startup_help_short") }}</p>
                             </div>
                             <div class="form-group">
                                 <label for="pConfigFeatures" class="control-label">{{ __("admin.features") }}</label>
@@ -122,7 +109,7 @@
                                             <option value="{{ $feature }}" selected>{{ $feature }}</option>
                                         @endforeach
                                     </select>
-                                    <p class="text-muted small">Additional features belonging to the egg. Useful for configuring additional panel modifications.</p>
+                                    <p class="text-muted small">{{ __("admin.egg_features_help") }}</p>
                                 </div>
                             </div>
                         </div>
@@ -139,8 +126,8 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="alert alert-warning">
-                                <p>The following configuration options should not be edited unless you understand how this system works. If wrongly modified it is possible for the daemon to break.</p>
-                                <p>All fields are required unless you select a separate option from the 'Copy Settings From' dropdown, in which case fields may be left blank to use the values from that Egg.</p>
+                                <p>{{ __("admin.egg_config_warning_alert") }}</p>
+                                <p>{{ __("admin.egg_copy_settings_alert_egg") }}</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -152,29 +139,29 @@
                                         <option value="{{ $o->id }}" {{ ($egg->config_from !== $o->id) ?: 'selected' }}>{{ $o->name }} &lt;{{ $o->author }}&gt;</option>
                                     @endforeach
                                 </select>
-                                <p class="text-muted small">If you would like to default to settings from another Egg select it from the menu above.</p>
+                                <p class="text-muted small">{{ __("admin.egg_config_from_help_menu") }}</p>
                             </div>
                             <div class="form-group">
                                 <label for="pConfigStop" class="form-label">{{ __("admin.stop_command") }}</label>
                                 <input type="text" id="pConfigStop" name="config_stop" class="form-control" value="{{ $egg->config_stop }}" />
-                                <p class="text-muted small">The command that should be sent to server processes to stop them gracefully. If you need to send a <code>SIGINT</code> you should enter <code>^C</code> here.</p>
+                                <p class="text-muted small">{!! __("admin.egg_stop_command_help") !!}</p>
                             </div>
                             <div class="form-group">
                                 <label for="pConfigLogs" class="form-label">{{ __("admin.log_configuration") }}</label>
                                 <textarea data-action="handle-tabs" id="pConfigLogs" name="config_logs" class="form-control" rows="6">{{ ! is_null($egg->config_logs) ? json_encode(json_decode($egg->config_logs), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) : '' }}</textarea>
-                                <p class="text-muted small">This should be a JSON representation of where log files are stored, and whether or not the daemon should be creating custom logs.</p>
+                                <p class="text-muted small">{{ __("admin.egg_log_config_help") }}</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="pConfigFiles" class="form-label">{{ __("admin.configuration_files") }}</label>
                                 <textarea data-action="handle-tabs" id="pConfigFiles" name="config_files" class="form-control" rows="6">{{ ! is_null($egg->config_files) ? json_encode(json_decode($egg->config_files), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) : '' }}</textarea>
-                                <p class="text-muted small">This should be a JSON representation of configuration files to modify and what parts should be changed.</p>
+                                <p class="text-muted small">{{ __("admin.egg_config_files_help") }}</p>
                             </div>
                             <div class="form-group">
                                 <label for="pConfigStartup" class="form-label">{{ __("admin.start_configuration") }}</label>
                                 <textarea data-action="handle-tabs" id="pConfigStartup" name="config_startup" class="form-control" rows="6">{{ ! is_null($egg->config_startup) ? json_encode(json_decode($egg->config_startup), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) : '' }}</textarea>
-                                <p class="text-muted small">This should be a JSON representation of what values the daemon should be looking for when booting a server to determine completion.</p>
+                                <p class="text-muted small">{{ __("admin.egg_startup_config_help") }}</p>
                             </div>
                         </div>
                     </div>

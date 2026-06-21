@@ -5,7 +5,7 @@
 @endsection
 
 @section('content-header')
-    <h1>{{ $egg->name }}<small>Managing variables for this Egg.</small></h1>
+    <h1>{{ $egg->name }}<small>{{ __("admin.egg_variables_header_help") }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
         <li><a href="{{ route('admin.nests') }}">{{ __("admin.nests") }}</a></li>
@@ -63,7 +63,7 @@
                                 <input type="text" name="default_value" value="{{ $variable->default_value }}" class="form-control" />
                             </div>
                             <div class="col-xs-12">
-                                <p class="text-muted small">This variable can be accessed in the startup command by using <code>{{ $variable->env_variable }}</code>.</p>
+                                <p class="text-muted small">{{ __("admin.egg_variable_access_help_prefix") }} <code>{{ $variable->env_variable }}</code>.</p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <label class="form-label">{{ __("admin.variable_rules") }}</label>
                             <input type="text" name="rules" class="form-control" value="{{ $variable->rules }}" />
-                            <p class="text-muted small">These rules are defined using standard <a href="https://laravel.com/docs/11.x/validation#available-validation-rules" target="_blank">Laravel Framework validation rules</a>.</p>
+                            <p class="text-muted small">{!! __("admin.egg_variable_rules_help") !!}</p>
                         </div>
                     </div>
                     <div class="box-footer">
@@ -116,7 +116,7 @@
                             <input type="text" name="default_value" class="form-control" value="{{ old('default_value') }}" />
                         </div>
                         <div class="col-xs-12">
-                            <p class="text-muted small">This variable can be accessed in the startup command by entering <code>@{{environment variable value}}</code>.</p>
+                            <p class="text-muted small">{!! __("admin.egg_variable_access_help_modal") !!}</p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -129,7 +129,7 @@
                     <div class="form-group">
                         <label class="control-label">{{ __("admin.variable_rules") }} <span class="field-required"></span></label>
                         <input type="text" name="rules" class="form-control" value="{{ old('rules', 'required|string|max:20') }}" placeholder="required|string|max:20" />
-                        <p class="text-muted small">These rules are defined using standard <a href="https://laravel.com/docs/11.x/validation#available-validation-rules" target="_blank">Laravel Framework validation rules</a>.</p>
+                        <p class="text-muted small">{!! __("admin.egg_variable_rules_help") !!}</p>
                     </div>
                 </div>
                 <div class="modal-footer">

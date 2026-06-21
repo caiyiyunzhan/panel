@@ -5,7 +5,7 @@
 @endsection
 
 @section('content-header')
-    <h1>{{ $egg->name }}<small>Manage the install script for this Egg.</small></h1>
+    <h1>{{ $egg->name }}<small>{{ __("admin.egg_scripts_header_help") }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
         <li><a href="{{ route('admin.nests') }}">{{ __("admin.nests") }}</a></li>
@@ -37,7 +37,7 @@
                 @if(! is_null($egg->copyFrom))
                     <div class="box-body">
                         <div class="callout callout-warning no-margin">
-                            This service option is copying installation scripts and container options from <a href="{{ route('admin.nests.egg.view', $egg->copyFrom->id) }}">{{ $egg->copyFrom->name }}</a>. Any changes you make to this script will not apply unless you select "None" from the dropdown box below.
+                            {{ __("admin.egg_scripts_copy_warning_prefix") }} <a href="{{ route('admin.nests.egg.view', $egg->copyFrom->id) }}">{{ $egg->copyFrom->name }}</a> {{ __("admin.egg_scripts_copy_warning_suffix") }}
                         </div>
                     </div>
                 @endif
@@ -54,22 +54,22 @@
                                     <option value="{{ $opt->id }}" {{ $egg->copy_script_from !== $opt->id ?: 'selected' }}>{{ $opt->name }}</option>
                                 @endforeach
                             </select>
-                            <p class="text-muted small">If selected, script above will be ignored and script from selected option will be used in place.</p>
+                            <p class="text-muted small">{{ __("admin.egg_scripts_copy_help") }}</p>
                         </div>
                         <div class="form-group col-sm-4">
                             <label class="control-label">{{ __("admin.install_container") }}</label>
                             <input type="text" name="script_container" class="form-control" value="{{ $egg->script_container }}" />
-                            <p class="text-muted small">Docker container to use when running this script for the server.</p>
+                            <p class="text-muted small">{{ __("admin.egg_scripts_container_help") }}</p>
                         </div>
                         <div class="form-group col-sm-4">
                             <label class="control-label">{{ __("admin.entrypoint_command") }}</label>
                             <input type="text" name="script_entry" class="form-control" value="{{ $egg->script_entry }}" />
-                            <p class="text-muted small">The entrypoint command to use for this script.</p>
+                            <p class="text-muted small">{{ __("admin.egg_scripts_entry_help") }}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 text-muted">
-                            The following service options rely on this script:
+                            {{ __("admin.egg_scripts_rely_text") }}
                             @if(count($relyOnScript) > 0)
                                 @foreach($relyOnScript as $rely)
                                     <a href="{{ route('admin.nests.egg.view', $rely->id) }}">

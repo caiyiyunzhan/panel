@@ -5,7 +5,7 @@
 @endsection
 
 @section('content-header')
-    <h1>{{ $node->name }}<small>Control allocations available for servers on this node.</small></h1>
+    <h1>{{ $node->name }}<small>{{ __("admin.node_allocation_header_help") }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">{{ __('admin.admin_label') }}</a></li>
         <li><a href="{{ route('admin.nodes') }}">{{ __('admin.nodes') }}</a></li>
@@ -106,21 +106,21 @@
                                     <option value="{{ $allocation->ip }}">{{ $allocation->ip }}</option>
                                 @endforeach
                             </select>
-                            <p class="text-muted small">Enter an IP address to assign ports to here.</p>
+                            <p class="text-muted small">{{ __("admin.node_allocation_ip_help") }}</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="pAllocationIP" class="control-label">{{ __("admin.ip_alias") }}</label>
                         <div>
                             <input type="text" id="pAllocationAlias" class="form-control" name="allocation_alias" placeholder="alias" />
-                            <p class="text-muted small">If you would like to assign a default alias to these allocations enter it here.</p>
+                            <p class="text-muted small">{{ __("admin.node_allocation_alias_help") }}</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="pAllocationPorts" class="control-label">{{ __("admin.ports") }}</label>
                         <div>
                             <select class="form-control" name="allocation_ports[]" id="pAllocationPorts" multiple></select>
-                            <p class="text-muted small">Enter individual ports or port ranges here separated by commas or spaces.</p>
+                            <p class="text-muted small">{{ __("admin.node_allocation_ports_help") }}</p>
                         </div>
                     </div>
                 </div>
@@ -200,7 +200,7 @@
         var allocation = $(this).data('id');
         swal({
             title: '',
-            text: 'Are you sure you want to delete this allocation?',
+            text: '{{ __("admin.allocation_delete_confirm") }}',
             type: 'warning',
             showCancelButton: true,
             allowOutsideClick: true,
@@ -305,7 +305,7 @@
             swal({
                 type: 'warning',
                 title: '',
-                text: 'Are you sure you want to delete the following allocations: ' + formattedItems + '?',
+                text: '{{ __("admin.allocation_delete_multi_confirm") }} ' + formattedItems + '?',
                 html: true,
                 showCancelButton: true,
                 showConfirmButton: true,
@@ -340,7 +340,7 @@
                         type: 'error',
                         title: 'Whoops!',
                         html: true,
-                        text: 'An error occurred while attempting to delete these allocations. Please try again.',
+                        text: '{{ __("admin.allocation_delete_error") }}',
                     });
                 });
             });
@@ -348,7 +348,7 @@
             swal({
                 type: 'warning',
                 title: '',
-                text: 'Please select allocation(s) to delete.',
+                text: '{{ __("admin.allocation_delete_select") }}',
             });
         }
     }
