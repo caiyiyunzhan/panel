@@ -1,0 +1,62 @@
+﻿x-common:
+  database:
+    &db-environment
+    MYSQL_PASSWORD: &db-password "pterodactyl_pass"
+    MYSQL_ROOT_PASSWORD: "root_pass_123"
+  panel:
+    &panel-environment
+    APP_URL: "http://localhost:8080"
+    APP_TIMEZONE: "Asia/Shanghai"
+    APP_SERVICE_AUTHOR: "admin@example.com"
+  mail:
+    &mail-environment
+    MAIL_FROM: "noreply@example.com"
+    MAIL_DRIVER: "smtp"
+    MAIL_HOST: "mail"
+    MAIL_PORT: "1025"
+    MAIL_USERNAME: ""
+    MAIL_PASSWORD: ""
+    MAIL_ENCRYPTION: "true"
+
+services:
+  database:
+    image: mariadb:11
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - "./docker-data/database:/var/lib/mysql"
+    environment:
+      <<: *db-environment
+      MYSQL_DATABASE: "panel"
+      MYSQL_USER: "pterodactyl"
+  cache:
+    image: redis:alpine
+    restart: always
+  panel:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    image: pterodactyl-panel:local
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+      - cache
+    volumes:
+      - "./docker-data/var/:/app/var/"
+      - "./docker-data/logs/:/app/storage/logs"
+    environment:
+      <<: [*panel-environment, *mail-environment]
+      DB_PASSWORD: *db-password
+      APP_ENV: "production"
+      APP_ENVIRONMENT_ONLY: "false"
+      RECAPTCHA_ENABLED: "false"
+      APP_LOCALE: "zh"
+      CACHE_DRIVER: "redis"
+      SESSION_DRIVER: "database"
+      QUEUE_DRIVER: "redis"
+      REDIS_HOST: "cache"
+      DB_HOST: "database"
+      DB_PORT: "3306"
+      HASHIDS_LENGTH: 8
