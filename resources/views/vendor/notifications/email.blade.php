@@ -149,7 +149,7 @@ $style = [
                                                 <tr>
                                                     <td style="{{ $fontFamily }}">
                                                         <p style="{{ $style['paragraph-sub'] }}">
-                                                            If you’re having trouble clicking the "{{ $actionText }}" button,
+                                                            {{ __("strings.email_click_trouble", ["action" => $actionText]) }}
                                                             {{ __('strings.email_copy_paste') }}
                                                         </p>
 

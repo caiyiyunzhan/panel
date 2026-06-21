@@ -264,4 +264,5 @@ return [
     "not_applicable" => "不适用",
     "unknown" => "未知",
     "no_permission_msg" => "您没有访问此页面的权限。",
+    "email_click_trouble" => "如果您无法点击 :action 按钮，",
 ];
