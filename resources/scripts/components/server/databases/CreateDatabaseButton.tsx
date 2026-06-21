@@ -85,7 +85,7 @@ export default () => {
                                     type={'string'}
                                     id={'connections_from'}
                                     name={'connectionsFrom'}
-                                    label={'Connections From'}
+                                    label={t('connections_from')}
                                     description={
                                         'Where connections should be allowed from. Leave blank to allow connections from anywhere.'
                                     }

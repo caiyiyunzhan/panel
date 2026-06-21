@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Locations
+    {{ __('admin.locations') }}
 @endsection
 
 @section('content-header')
@@ -27,7 +27,7 @@
                     <tbody>
                         <tr>
                             <th>{{ __('admin.id') }}</th>
-                            <th>Short Code</th>
+                            <th>{{ __("admin.short_code") }}</th>
                             <th>{{ __('admin.description') }}</th>
                             <th class="text-center">{{ __('admin.nodes') }}</th>
                             <th class="text-center">{{ __('admin.servers') }}</th>
@@ -53,12 +53,12 @@
             <form action="{{ route('admin.locations') }}" method="POST">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Create Location</h4>
+                    <h4 class="modal-title">{{ __("admin.create_location") }}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="pShortModal" class="form-label">Short Code</label>
+                            <label for="pShortModal" class="form-label">{{ __("admin.short_code") }}</label>
                             <input type="text" name="short" id="pShortModal" class="form-control" />
                             <p class="text-muted small">A short identifier used to distinguish this location from others. Must be between 1 and 60 characters, for example, <code>us.nyc.lvl3</code>.</p>
                         </div>
@@ -72,7 +72,7 @@
                 <div class="modal-footer">
                     {!! csrf_field() !!}
                     <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">{{ __('admin.cancel') }}</button>
-                    <button type="submit" class="btn btn-success btn-sm">Create</button>
+                    <button type="submit" class="btn btn-success btn-sm">{{ __("admin.create_new") }}</button>
                 </div>
             </form>
         </div>

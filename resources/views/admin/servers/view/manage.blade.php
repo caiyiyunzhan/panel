@@ -10,7 +10,7 @@
         <li><a href="{{ route('admin.index') }}">Admin</a></li>
         <li><a href="{{ route('admin.servers') }}">Servers</a></li>
         <li><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a></li>
-        <li class="active">Manage</li>
+        <li class="active">{{ __("admin.manage") }}</li>
     </ol>
 @endsection
 
@@ -23,7 +23,7 @@
                     <h3 class="box-title">{{ __("admin.reinstall_server") }}</h3>
                 </div>
                 <div class="box-body">
-                    <p>This will reinstall the server with the assigned service scripts. <strong>Danger!</strong> This could overwrite server data.</p>
+                    <p>{{ __("admin.reinstall_server_warning") }}</p>
                 </div>
                 <div class="box-footer">
                     @if($server->isInstalled())
@@ -32,7 +32,7 @@
                             <button type="submit" class="btn btn-danger">{{ __("admin.reinstall_server") }}</button>
                         </form>
                     @else
-                        <button class="btn btn-danger disabled">Server Must Install Properly to Reinstall</button>
+                        <button class="btn btn-danger disabled">{{ __("admin.server_must_install_to_reinstall") }}</button>
                     @endif
                 </div>
             </div>
@@ -40,15 +40,15 @@
         <div class="col-sm-4">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Install Status</h3>
+                    <h3 class="box-title">{{ __("admin.install_status") }}</h3>
                 </div>
                 <div class="box-body">
-                    <p>If you need to change the install status from uninstalled to installed, or vice versa, you may do so with the button below.</p>
+                    <p>{{ __("admin.install_status_desc") }}</p>
                 </div>
                 <div class="box-footer">
                     <form action="{{ route('admin.servers.view.manage.toggle', $server->id) }}" method="POST">
                         {!! csrf_field() !!}
-                        <button type="submit" class="btn btn-primary">Toggle Install Status</button>
+                        <button type="submit" class="btn btn-primary">{{ __("admin.toggle_install_status") }}</button>
                     </form>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                         <h3 class="box-title">{{ __("admin.suspend_server") }}</h3>
                     </div>
                     <div class="box-body">
-                        <p>This will suspend the server, stop any running processes, and immediately block the user from being able to access their files or otherwise manage the server through the panel or API.</p>
+                        <p>{{ __("admin.suspend_server_desc") }}</p>
                     </div>
                     <div class="box-footer">
                         <form action="{{ route('admin.servers.view.manage.suspension', $server->id) }}" method="POST">
@@ -79,7 +79,7 @@
                         <h3 class="box-title">{{ __("admin.unsuspend_server") }}</h3>
                     </div>
                     <div class="box-body">
-                        <p>This will unsuspend the server and restore normal user access.</p>
+                        <p>{{ __("admin.unsuspend_server_desc") }}</p>
                     </div>
                     <div class="box-footer">
                         <form action="{{ route('admin.servers.view.manage.suspension', $server->id) }}" method="POST">
@@ -148,7 +148,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <label for="pNodeId">Node</label>
+                                <label for="pNodeId">{{ __("admin.node") }}</label>
                                 <select name="node_id" id="pNodeId" class="form-control">
                                     @foreach($locations as $location)
                                         <optgroup label="{{ $location->long }} ({{ $location->short }})">
@@ -164,27 +164,27 @@
                                         </optgroup>
                                     @endforeach
                                 </select>
-                                <p class="small text-muted no-margin">The node which this server will be transferred to.</p>
+                                <p class="small text-muted no-margin">{{ __("admin.transfer_node_desc") }}</p>
                             </div>
 
                             <div class="form-group col-md-12">
-                                <label for="pAllocation">Default Allocation</label>
+                                <label for="pAllocation">{{ __("admin.default_allocation") }}</label>
                                 <select name="allocation_id" id="pAllocation" class="form-control"></select>
-                                <p class="small text-muted no-margin">The main allocation that will be assigned to this server.</p>
+                                <p class="small text-muted no-margin">{{ __("admin.default_allocation_desc") }}</p>
                             </div>
 
                             <div class="form-group col-md-12">
-                                <label for="pAllocationAdditional">Additional Allocation(s)</label>
+                                <label for="pAllocationAdditional">{{ __("admin.additional_allocations") }}</label>
                                 <select name="allocation_additional[]" id="pAllocationAdditional" class="form-control" multiple></select>
-                                <p class="small text-muted no-margin">Additional allocations to assign to this server on creation.</p>
+                                <p class="small text-muted no-margin">{{ __("admin.additional_allocations_desc") }}</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="modal-footer">
                         {!! csrf_field() !!}
-                        <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success btn-sm">Confirm</button>
+                        <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">{{ __("admin.cancel") }}</button>
+                        <button type="submit" class="btn btn-success btn-sm">{{ __("admin.confirm") }}</button>
                     </div>
                 </form>
             </div>

@@ -21,87 +21,87 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Information</h3>
+                        <h3 class="box-title">{{ __("admin.information") }}</h3>
                     </div>
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tr>
-                                <td>Internal Identifier</td>
+                                <td>{{ __("admin.internal_identifier") }}</td>
                                 <td><code>{{ $server->id }}</code></td>
                             </tr>
                             <tr>
-                                <td>External Identifier</td>
+                                <td>{{ __("admin.external_identifier") }}</td>
                                 @if(is_null($server->external_id))
-                                    <td><span class="label label-default">Not Set</span></td>
+                                    <td><span class="label label-default">{{ __("admin.not_set") }}</span></td>
                                 @else
                                     <td><code>{{ $server->external_id }}</code></td>
                                 @endif
                             </tr>
                             <tr>
-                                <td>UUID / Docker Container ID</td>
+                                <td>{{ __("admin.uuid_docker_container_id") }}</td>
                                 <td><code>{{ $server->uuid }}</code></td>
                             </tr>
                             <tr>
-                                <td>Current Egg</td>
+                                <td>{{ __("admin.current_egg") }}</td>
                                 <td>
                                     <a href="{{ route('admin.nests.view', $server->nest_id) }}">{{ $server->nest->name }}</a> ::
                                     <a href="{{ route('admin.nests.egg.view', $server->egg_id) }}">{{ $server->egg->name }}</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td>Server Name</td>
+                                <td>{{ __("admin.server_name") }}</td>
                                 <td>{{ $server->name }}</td>
                             </tr>
                             <tr>
-                                <td>CPU Limit</td>
+                                <td>{{ __("admin.cpu_limit") }}</td>
                                 <td>
                                     @if($server->cpu === 0)
-                                        <code>Unlimited</code>
+                                        <code>{{ __("admin.unlimited") }}</code>
                                     @else
                                         <code>{{ $server->cpu }}%</code>
                                     @endif
                                 </td>
                             </tr>
                             <tr>
-                                <td>CPU Pinning</td>
+                                <td>{{ __("admin.cpu_pinning") }}</td>
                                 <td>
                                     @if($server->threads != null)
                                         <code>{{ $server->threads }}</code>
                                     @else
-                                        <span class="label label-default">Not Set</span>
+                                        <span class="label label-default">{{ __("admin.not_set") }}</span>
                                     @endif
                                 </td>
                             </tr>
                             <tr>
-                                <td>Memory</td>
+                                <td>{{ __("admin.memory") }}</td>
                                 <td>
                                     @if($server->memory === 0)
-                                        <code>Unlimited</code>
+                                        <code>{{ __("admin.unlimited") }}</code>
                                     @else
                                         <code>{{ $server->memory }}MiB</code>
                                     @endif
                                     /
                                     @if($server->swap === 0)
-                                        <code data-toggle="tooltip" data-placement="top" title="Swap Space">Not Set</code>
+                                        <code data-toggle="tooltip" data-placement="top" title="{{ __("admin.swap_space") }}">Not Set</code>
                                     @elseif($server->swap === -1)
-                                        <code data-toggle="tooltip" data-placement="top" title="Swap Space">Unlimited</code>
+                                        <code data-toggle="tooltip" data-placement="top" title="{{ __("admin.swap_space") }}">Unlimited</code>
                                     @else
-                                        <code data-toggle="tooltip" data-placement="top" title="Swap Space"> {{ $server->swap }}MiB</code>
+                                        <code data-toggle="tooltip" data-placement="top" title="{{ __("admin.swap_space") }}"> {{ $server->swap }}MiB</code>
                                     @endif
                                 </td>
                             </tr>
                             <tr>
-                                <td>Disk Space</td>
+                                <td>{{ __("admin.disk_space") }}</td>
                                 <td>
                                     @if($server->disk === 0)
-                                        <code>Unlimited</code>
+                                        <code>{{ __("admin.unlimited") }}</code>
                                     @else
                                         <code>{{ $server->disk }}MiB</code>
                                     @endif
                                 </td>
                             </tr>
                             <tr>
-                                <td>Block IO Weight</td>
+                                <td>{{ __("admin.block_io_weight") }}</td>
                                 <td><code>{{ $server->io }}</code></td>
                             </tr>
                             <tr>
@@ -109,12 +109,12 @@
                                 <td><code>{{ $server->allocation->ip }}:{{ $server->allocation->port }}</code></td>
                             </tr>
                             <tr>
-                                <td>{{ __("admin.server_connection") }} Alias</td>
+                                <td>{{ __("admin.connection_alias") }}</td>
                                 <td>
                                     @if($server->allocation->alias !== $server->allocation->ip)
                                         <code>{{ $server->allocation->alias }}:{{ $server->allocation->port }}</code>
                                     @else
-                                        <span class="label label-default">No Alias Assigned</span>
+                                        <span class="label label-default">{{ __("admin.no_alias_assigned") }}</span>
                                     @endif
                                 </td>
                             </tr>

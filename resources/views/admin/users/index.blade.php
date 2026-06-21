@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    List Users
+    {{ __("admin.list_users") }}
 @endsection
 
 @section('content-header')
@@ -21,7 +21,7 @@
                 <div class="box-tools search01">
                     <form action="{{ route('admin.users') }}" method="GET">
                         <div class="input-group input-group-sm">
-                            <input type="text" name="filter[email]" class="form-control pull-right" value="{{ request()->input('filter.email') }}" placeholder="Search">
+                            <input type="text" name="filter[email]" class="form-control pull-right" value="{{ request()->input('filter.email') }}" placeholder="{{ __("admin.search") }}">
                             <div class="input-group-btn">
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                 <a href="{{ route('admin.users.new') }}"><button type="button" class="btn btn-sm btn-primary" style="border-radius: 0 3px 3px 0;margin-left:-1px;">{{ __('admin.create_new') }}</button></a>
@@ -39,8 +39,8 @@
                             <th>{{ __('admin.client_name') }}</th>
                             <th>{{ __('admin.username') }}</th>
                             <th class="text-center">{{ __('admin.2fa') }}</th>
-                            <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="Servers that this user is marked as the owner of.">Servers Owned</span></th>
-                            <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="Servers that this user can access because they are marked as a subuser.">Can Access</span></th>
+                            <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="{{ __("admin.servers_owned_tooltip") }}">{{ __("admin.servers_owned") }}</span></th>
+                            <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="{{ __("admin.can_access_tooltip") }}">{{ __("admin.can_access") }}</span></th>
                             <th></th>
                         </tr>
                     </thead>

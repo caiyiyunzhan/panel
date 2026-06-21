@@ -10,7 +10,7 @@
         <li><a href="{{ route('admin.index') }}">{{ __('admin.admin_label') }}</a></li>
         <li><a href="{{ route('admin.nodes') }}">{{ __('admin.nodes') }}</a></li>
         <li><a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></li>
-        <li class="active">Allocations</li>
+        <li class="active">{{ __("admin.allocations") }}</li>
     </ol>
 @endsection
 
@@ -19,10 +19,10 @@
     <div class="col-xs-12">
         <div class="nav-tabs-custom nav-tabs-floating">
             <ul class="nav nav-tabs">
-                <li><a href="{{ route('admin.nodes.view', $node->id) }}">About</a></li>
+                <li><a href="{{ route('admin.nodes.view', $node->id) }}">{{ __("admin.about") }}</a></li>
                 <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">{{ __('admin.settings') }}</a></li>
                 <li><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">{{ __('admin.configuration') }}</a></li>
-                <li class="active"><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">Allocation</a></li>
+                <li class="active"><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">{{ __("admin.allocation") }}</a></li>
                 <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">{{ __('admin.servers') }}</a></li>
             </ul>
         </div>
@@ -32,7 +32,7 @@
     <div class="col-sm-8">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Existing Allocations</h3>
+                <h3 class="box-title">{{ __("admin.existing_allocations") }}</h3>
             </div>
             <div class="box-body table-responsive no-padding" style="overflow-x: visible">
                 <table class="table table-hover" style="margin-bottom:0;">
@@ -40,17 +40,17 @@
                         <th>
                             <input type="checkbox" class="select-all-files hidden-xs" data-action="selectAll">
                         </th>
-                        <th>IP Address <i class="fa fa-fw fa-minus-square" style="font-weight:normal;color:#d9534f;cursor:pointer;" data-toggle="modal" data-target="#allocationModal"></i></th>
-                        <th>IP Alias</th>
-                        <th>Port</th>
-                        <th>Assigned To</th>
+                        <th>{{ __("admin.ip_address") }} <i class="fa fa-fw fa-minus-square" style="font-weight:normal;color:#d9534f;cursor:pointer;" data-toggle="modal" data-target="#allocationModal"></i></th>
+                        <th>{{ __("admin.ip_alias") }}</th>
+                        <th>{{ __("admin.port") }}</th>
+                        <th>{{ __("admin.assigned_to") }}</th>
                         <th>
                             <div class="btn-group hidden-xs">
                                 <button type="button" id="mass_actions" class="btn btn-sm btn-default dropdown-toggle disabled"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mass Actions <span class="caret"></span>
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ __("admin.mass_actions") }} <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-massactions">
-                                    <li><a href="#" id="selective-deletion" data-action="selective-deletion">Delete <i class="fa fa-fw fa-trash-o"></i></a></li>
+                                    <li><a href="#" id="selective-deletion" data-action="selective-deletion">{{ __("admin.delete") }} <i class="fa fa-fw fa-trash-o"></i></a></li>
                                 </ul>
                             </div>
                         </th>
@@ -95,11 +95,11 @@
         <form action="{{ route('admin.nodes.view.allocation', $node->id) }}" method="POST">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Assign New Allocations</h3>
+                    <h3 class="box-title">{{ __("admin.assign_new_allocations") }}</h3>
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="pAllocationIP" class="control-label">IP Address</label>
+                        <label for="pAllocationIP" class="control-label">{{ __("admin.ip_address") }}</label>
                         <div>
                             <select class="form-control" name="allocation_ip" id="pAllocationIP" multiple>
                                 @foreach($allocations as $allocation)
@@ -110,14 +110,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="pAllocationIP" class="control-label">IP Alias</label>
+                        <label for="pAllocationIP" class="control-label">{{ __("admin.ip_alias") }}</label>
                         <div>
                             <input type="text" id="pAllocationAlias" class="form-control" name="allocation_alias" placeholder="alias" />
                             <p class="text-muted small">If you would like to assign a default alias to these allocations enter it here.</p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="pAllocationPorts" class="control-label">Ports</label>
+                        <label for="pAllocationPorts" class="control-label">{{ __("admin.ports") }}</label>
                         <div>
                             <select class="form-control" name="allocation_ports[]" id="pAllocationPorts" multiple></select>
                             <p class="text-muted small">Enter individual ports or port ranges here separated by commas or spaces.</p>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="box-footer">
                     {!! csrf_field() !!}
-                    <button type="submit" class="btn btn-success btn-sm pull-right">Submit</button>
+                    <button type="submit" class="btn btn-success btn-sm pull-right">{{ __("admin.submit") }}</button>
                 </div>
             </div>
         </form>
@@ -137,7 +137,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Delete Allocations for IP Block</h4>
+                <h4 class="modal-title">{{ __("admin.delete_allocations_for_ip_block") }}</h4>
             </div>
             <form action="{{ route('admin.nodes.view.allocation.removeBlock', $node->id) }}" method="POST">
                 <div class="modal-body">
@@ -154,7 +154,7 @@
                 <div class="modal-footer">
                     {{{ csrf_field() }}}
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('admin.close') }}</button>
-                    <button type="submit" class="btn btn-danger">Delete Allocations</button>
+                    <button type="submit" class="btn btn-danger">{{ __("admin.delete_allocations") }}</button>
                 </div>
             </form>
         </div>

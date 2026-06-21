@@ -181,12 +181,12 @@ const TaskDetailsModal = ({ schedule, task }: Props) => {
                         <FormikSwitch
                             name={'continueOnFailure'}
                             description={'Future tasks will be run when this task fails.'}
-                            label={'Continue on Failure'}
+                            label={t('continues_on_failure')}
                         />
                     </div>
                     <div css={tw`flex justify-end mt-6`}>
                         <Button type={'submit'} disabled={isSubmitting}>
-                            {task ? 'Save Changes' : 'Create Task'}
+                            {task ? t('save_changes') : 'Create Task'}
                         </Button>
                     </div>
                 </Form>

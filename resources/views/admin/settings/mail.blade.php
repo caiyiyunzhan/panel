@@ -2,11 +2,11 @@
 @include('partials/admin.settings.nav', ['activeTab' => 'mail'])
 
 @section('title')
-    Mail Settings
+    {{ __("admin.mail_settings") }}
 @endsection
 
 @section('content-header')
-    <h1>Mail Settings<small>Configure how Pterodactyl should handle sending emails.</small></h1>
+    <h1>{{ __("admin.mail_settings") }}<small>Configure how Pterodactyl should handle sending emails.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">{{ __("admin.admin_label") }}</a></li>
         <li class="active">{{ __("admin.settings") }}</li>
@@ -19,15 +19,13 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Email Settings</h3>
+                    <h3 class="box-title">{{ __("admin.mail_settings") }}</h3>
                 </div>
                 @if($disabled)
                     <div class="box-body">
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="alert alert-info no-margin-bottom">
-                                    This interface is limited to instances using SMTP as the mail driver. Please either use <code>php artisan p:environment:mail</code> command to update your email settings, or set <code>MAIL_DRIVER=smtp</code> in your environment file.
-                                </div>
+                                <div class="alert alert-info no-margin-bottom">{{ __("admin.mail_interface_notice") }}</div>
                             </div>
                         </div>
                     </div>
@@ -36,42 +34,42 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">SMTP Host</label>
+                                    <label class="control-label">{{ __("admin.smtp_host") }}</label>
                                     <div>
                                         <input required type="text" class="form-control" name="mail:mailers:smtp:host" value="{{ old('mail:mailers:smtp:host', config('mail.mailers.smtp.host')) }}" />
-                                        <p class="text-muted small">Enter the SMTP server address that mail should be sent through.</p>
+                                        <p class="text-muted small">{{ __("admin.smtp_host_desc") }}</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label class="control-label">SMTP Port</label>
+                                    <label class="control-label">{{ __("admin.smtp_port") }}</label>
                                     <div>
                                         <input required type="number" class="form-control" name="mail:mailers:smtp:port" value="{{ old('mail:mailers:smtp:port', config('mail.mailers.smtp.port')) }}" />
-                                        <p class="text-muted small">Enter the SMTP server port that mail should be sent through.</p>
+                                        <p class="text-muted small">{{ __("admin.smtp_port_desc") }}</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label class="control-label">Encryption</label>
+                                    <label class="control-label">{{ __("admin.encryption") }}</label>
                                     <div>
                                         @php
                                             $encryption = old('mail:mailers:smtp:encryption', config('mail.mailers.smtp.encryption'));
                                         @endphp
                                         <select name="mail:mailers:smtp:encryption" class="form-control">
-                                            <option value="" @if($encryption === '') selected @endif>None</option>
-                                            <option value="tls" @if($encryption === 'tls') selected @endif>Transport Layer Security (TLS)</option>
-                                            <option value="ssl" @if($encryption === 'ssl') selected @endif>Secure Sockets Layer (SSL)</option>
+                                            <option value="" @if($encryption === '') selected @endif>{{ __("admin.none") }}</option>
+                                            <option value="tls" @if($encryption === 'tls') selected @endif>{{ __("admin.tls") }}</option>
+                                            <option value="ssl" @if($encryption === 'ssl') selected @endif>{{ __("admin.ssl") }}</option>
                                         </select>
-                                        <p class="text-muted small">Select the type of encryption to use when sending mail.</p>
+                                        <p class="text-muted small">{{ __("admin.encryption_desc") }}</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Username <span class="field-optional"></span></label>
+                                    <label class="control-label">{{ __("admin.username") }} <span class="field-optional"></span></label>
                                     <div>
                                         <input type="text" class="form-control" name="mail:mailers:smtp:username" value="{{ old('mail:mailers:smtp:username', config('mail.mailers.smtp.username')) }}" />
-                                        <p class="text-muted small">The username to use when connecting to the SMTP server.</p>
+                                        <p class="text-muted small">{{ __("admin.smtp_username_desc") }}</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Password <span class="field-optional"></span></label>
+                                    <label class="control-label">{{ __("admin.password") }} <span class="field-optional"></span></label>
                                     <div>
                                         <input type="password" class="form-control" name="mail:mailers:smtp:password"/>
                                         <p class="text-muted small">The password to use in conjunction with the SMTP username. Leave blank to continue using the existing password. To set the password to an empty value enter <code>!e</code> into the field.</p>
@@ -81,17 +79,17 @@
                             <div class="row">
                                 <hr />
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Mail From</label>
+                                    <label class="control-label">{{ __("admin.mail_from") }}</label>
                                     <div>
                                         <input required type="email" class="form-control" name="mail:from:address" value="{{ old('mail:from:address', config('mail.from.address')) }}" />
-                                        <p class="text-muted small">Enter an email address that all outgoing emails will originate from.</p>
+                                        <p class="text-muted small">{{ __("admin.mail_from_desc") }}</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Mail From Name <span class="field-optional"></span></label>
+                                    <label class="control-label">{{ __("admin.mail_from_name") }} <span class="field-optional"></span></label>
                                     <div>
                                         <input type="text" class="form-control" name="mail:from:name" value="{{ old('mail:from:name', config('mail.from.name')) }}" />
-                                        <p class="text-muted small">The name that emails should appear to come from.</p>
+                                        <p class="text-muted small">{{ __("admin.mail_from_name_desc") }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +97,8 @@
                         <div class="box-footer">
                             {{ csrf_field() }}
                             <div class="pull-right">
-                                <button type="button" id="testButton" class="btn btn-sm btn-success">Test</button>
-                                <button type="button" id="saveButton" class="btn btn-sm btn-primary">Save</button>
+                                <button type="button" id="testButton" class="btn btn-sm btn-success">{{ __("admin.test") }}</button>
+                                <button type="button" id="saveButton" class="btn btn-sm btn-primary">{{ __("admin.save") }}</button>
                             </div>
                         </div>
                     </form>
@@ -137,10 +135,10 @@
         function testSettings() {
             swal({
                 type: 'info',
-                title: 'Test Mail Settings',
-                text: 'Click "Test" to begin the test.',
+                title: 'Test {{ __("admin.mail_settings") }}',
+                text: '{{ __("admin.test_mail_confirm_text") }}',
                 showCancelButton: true,
-                confirmButtonText: 'Test',
+                confirmButtonText: '{{ __("admin.test") }}',
                 closeOnConfirm: false,
                 showLoaderOnConfirm: true
             }, function () {
@@ -152,8 +150,8 @@
                     showErrorDialog(jqXHR, 'test');
                 }).done(function () {
                     swal({
-                        title: 'Success',
-                        text: 'The test message was sent successfully.',
+                        title: '{{ __("admin.success") }}',
+                        text: '{{ __("admin.test_mail_success") }}',
                         type: 'success'
                     });
                 });
@@ -180,8 +178,8 @@
             }
 
             swal({
-                title: 'Whoops!',
-                text: 'An error occurred while attempting to ' + verb + ' mail settings: ' + errorText,
+                title: '{{ __("admin.whoops") }}',
+                text: '{{ __("admin.mail_error_prefix") }}' + verb + '{{ __("admin.mail_error_suffix") }}' + errorText,
                 type: 'error'
             });
         }
@@ -191,8 +189,8 @@
             $('#saveButton').on('click', function () {
                 saveSettings().done(function () {
                     swal({
-                        title: 'Success',
-                        text: 'Mail settings have been updated successfully and the queue worker was restarted to apply these changes.',
+                        title: '{{ __("admin.success") }}',
+                        text: '{{ __("admin.mail_save_success") }}',
                         type: 'success'
                     });
                 });

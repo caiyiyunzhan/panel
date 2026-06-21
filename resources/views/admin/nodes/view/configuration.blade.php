@@ -19,10 +19,10 @@
     <div class="col-xs-12">
         <div class="nav-tabs-custom nav-tabs-floating">
             <ul class="nav nav-tabs">
-                <li><a href="{{ route('admin.nodes.view', $node->id) }}">About</a></li>
+                <li><a href="{{ route('admin.nodes.view', $node->id) }}">{{ __("admin.about") }}</a></li>
                 <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">{{ __('admin.settings') }}</a></li>
                 <li class="active"><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">{{ __('admin.configuration') }}</a></li>
-                <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">Allocation</a></li>
+                <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">{{ __("admin.allocation") }}</a></li>
                 <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">{{ __('admin.servers') }}</a></li>
             </ul>
         </div>
@@ -32,7 +32,7 @@
     <div class="col-sm-8">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Configuration File</h3>
+                <h3 class="box-title">{{ __("admin.configuration_files") }}</h3>
             </div>
             <div class="box-body">
                 <pre class="no-margin">{{ $node->getYamlConfiguration() }}</pre>
@@ -54,7 +54,7 @@
                 </p>
             </div>
             <div class="box-footer">
-                <button type="button" id="configTokenBtn" class="btn btn-sm btn-default" style="width:100%;">Generate Token</button>
+                <button type="button" id="configTokenBtn" class="btn btn-sm btn-default" style="width:100%;">{{ __("admin.generate_token") }}</button>
             </div>
         </div>
     </div>

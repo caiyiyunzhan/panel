@@ -14,7 +14,7 @@ const ApiKeyModal = ({ apiKey }: Props) => {
 
     return (
         <>
-            <h3 css={tw`mb-6 text-2xl`}>Your API Key</h3>
+            <h3 css={tw`mb-6 text-2xl`}>t('your_api_key')</h3>
             <p css={tw`text-sm mb-6`}>
                 The API key you have requested is shown below. Please store this in a safe location, it will not be
                 shown again.

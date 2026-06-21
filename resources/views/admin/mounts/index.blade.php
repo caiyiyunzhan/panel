@@ -18,10 +18,10 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Mount List</h3>
+                    <h3 class="box-title">{{ __("admin.mount_list") }}</h3>
 
                     <div class="box-tools">
-                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newMountModal">Create New</button>
+                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newMountModal">{{ __("admin.create_new") }}</button>
                     </div>
                 </div>
 
@@ -29,11 +29,11 @@
                     <table class="table table-hover">
                         <tbody>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Source</th>
-                                <th>Target</th>
-                                <th class="text-center">Eggs</th>
+                                <th>{{ __("admin.id") }}</th>
+                                <th>{{ __("admin.name") }}</th>
+                                <th>{{ __("admin.source") }}</th>
+                                <th>{{ __("admin.target") }}</th>
+                                <th class="text-center">{{ __("admin.eggs") }}</th>
                                 <th class="text-center">{{ __("admin.nodes") }}</th>
                                 <th class="text-center">{{ __("admin.servers") }}</th>
                             </tr>
@@ -65,37 +65,37 @@
                             <span aria-hidden="true" style="color: #FFFFFF">&times;</span>
                         </button>
 
-                        <h4 class="modal-title">Create Mount</h4>
+                        <h4 class="modal-title">{{ __("admin.create_mount_button") }}</h4>
                     </div>
 
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <label for="pName" class="form-label">Name</label>
+                                <label for="pName" class="form-label">{{ __("admin.name") }}</label>
                                 <input type="text" id="pName" name="name" class="form-control" />
                                 <p class="text-muted small">Unique name used to separate this mount from another.</p>
                             </div>
 
                             <div class="col-md-12">
-                                <label for="pDescription" class="form-label">Description</label>
+                                <label for="pDescription" class="form-label">{{ __("admin.description") }}</label>
                                 <textarea id="pDescription" name="description" class="form-control" rows="4"></textarea>
                                 <p class="text-muted small">A longer description for this mount, must be less than 191 characters.</p>
                             </div>
 
                             <div class="col-md-6">
-                                <label for="pSource" class="form-label">Source</label>
+                                <label for="pSource" class="form-label">{{ __("admin.source") }}</label>
                                 <input type="text" id="pSource" name="source" class="form-control" />
                                 <p class="text-muted small">File path on the host system to mount to a container.</p>
                             </div>
 
                             <div class="col-md-6">
-                                <label for="pTarget" class="form-label">Target</label>
+                                <label for="pTarget" class="form-label">{{ __("admin.target") }}</label>
                                 <input type="text" id="pTarget" name="target" class="form-control" />
                                 <p class="text-muted small">Where the mount will be accessible inside a container.</p>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label">Read Only</label>
+                                <label class="form-label">{{ __("admin.read_only") }}</label>
 
                                 <div>
                                     <div class="radio radio-success radio-inline">
@@ -113,7 +113,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label">User Mountable</label>
+                                <label class="form-label">{{ __("admin.user_mountable") }}</label>
 
                                 <div>
                                     <div class="radio radio-success radio-inline">
@@ -134,8 +134,8 @@
 
                     <div class="modal-footer">
                         {!! csrf_field() !!}
-                        <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success btn-sm">Create</button>
+                        <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">{{ __("admin.cancel") }}</button>
+                        <button type="submit" class="btn btn-success btn-sm">{{ __("admin.create") }}</button>
                     </div>
                 </form>
             </div>

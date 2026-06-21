@@ -88,9 +88,9 @@ $style = [
                                                 {{ $greeting }}
                                             @else
                                                 @if ($level == 'error')
-                                                    Whoops!
+                                                    {{ __('strings.error') }}
                                                 @else
-                                                    Hello!
+                                                    {{ __('strings.hello') }}
                                                 @endif
                                             @endif
                                         </h1>
@@ -140,7 +140,7 @@ $style = [
 
                                         <!-- Salutation -->
                                         <p style="{{ $style['paragraph'] }}">
-                                            Regards,<br>{{ config('app.name') }}
+                                            {{ __('strings.regards') }},<br>{{ config('app.name') }}
                                         </p>
 
                                         <!-- Sub Copy -->
@@ -150,7 +150,7 @@ $style = [
                                                     <td style="{{ $fontFamily }}">
                                                         <p style="{{ $style['paragraph-sub'] }}">
                                                             If you’re having trouble clicking the "{{ $actionText }}" button,
-                                                            copy and paste the URL below into your web browser:
+                                                            {{ __('strings.email_copy_paste') }}
                                                         </p>
 
                                                         <p style="{{ $style['paragraph-sub'] }}">
@@ -177,7 +177,7 @@ $style = [
                                         <p style="{{ $style['paragraph-sub'] }}">
                                             &copy; {{ date('Y') }}
                                             <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ config('app.name') }}</a>.
-                                            All rights reserved.
+                                            {{ __('strings.all_rights_reserved') }}
                                         </p>
                                     </td>
                                 </tr>

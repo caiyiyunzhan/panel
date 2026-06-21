@@ -26,7 +26,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">{{ __('admin.configured_nests') }}</h3>
                 <div class="box-tools">
-                    <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#importServiceOptionModal" role="button"><i class="fa fa-upload"></i> Import Egg</a>
+                    <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#importServiceOptionModal" role="button"><i class="fa fa-upload"></i> {{ __("admin.import_egg") }}</a>
                     <a href="{{ route('admin.nests.new') }}" class="btn btn-primary btn-sm">{{ __('admin.create_new') }}</a>
                 </div>
             </div>
@@ -63,14 +63,14 @@
             <form action="{{ route('admin.nests.egg.import') }}" enctype="multipart/form-data" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label" for="pImportFile">Egg File <span class="field-required"></span></label>
+                        <label class="control-label" for="pImportFile">{{ __("admin.egg_file") }} <span class="field-required"></span></label>
                         <div>
                             <input id="pImportFile" type="file" name="import_file" class="form-control" accept="application/json" />
                             <p class="small text-muted">Select the <code>.json</code> file for the new egg that you wish to import.</p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="pImportToNest">Associated Nest <span class="field-required"></span></label>
+                        <label class="control-label" for="pImportToNest">{{ __("admin.associated_nest") }} <span class="field-required"></span></label>
                         <div>
                             <select id="pImportToNest" name="import_to_nest">
                                 @foreach($nests as $nest)

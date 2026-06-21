@@ -52,7 +52,7 @@ export default ({
                             autoFocus
                         />
                         <div css={tw`mt-6 text-right`}>
-                            <Button>Create File</Button>
+                            <Button>t('create_file')</Button>
                         </div>
                     </Form>
                 </Modal>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    {{ __("admin.nests_title") }} &rarr; Egg: {{ $egg->name }} &rarr; Install Script
+    {{ __("admin.nests_title") }} &rarr; Egg: {{ $egg->name }} &rarr; {{ __("admin.install_script") }}
 @endsection
 
 @section('content-header')
@@ -20,9 +20,9 @@
     <div class="col-xs-12">
         <div class="nav-tabs-custom nav-tabs-floating">
             <ul class="nav nav-tabs">
-                <li><a href="{{ route('admin.nests.egg.view', $egg->id) }}">Configuration</a></li>
-                <li><a href="{{ route('admin.nests.egg.variables', $egg->id) }}">Variables</a></li>
-                <li class="active"><a href="{{ route('admin.nests.egg.scripts', $egg->id) }}">Install Script</a></li>
+                <li><a href="{{ route('admin.nests.egg.view', $egg->id) }}">{{ __("admin.configuration") }}</a></li>
+                <li><a href="{{ route('admin.nests.egg.variables', $egg->id) }}">{{ __("admin.egg_variables") }}</a></li>
+                <li class="active"><a href="{{ route('admin.nests.egg.scripts', $egg->id) }}">{{ __("admin.install_script") }}</a></li>
             </ul>
         </div>
     </div>
@@ -32,7 +32,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Install Script</h3>
+                    <h3 class="box-title">{{ __("admin.install_script") }}</h3>
                 </div>
                 @if(! is_null($egg->copyFrom))
                     <div class="box-body">
@@ -47,9 +47,9 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="form-group col-sm-4">
-                            <label class="control-label">Copy Script From</label>
+                            <label class="control-label">{{ __("admin.copy_script") }}</label>
                             <select id="pCopyScriptFrom" name="copy_script_from">
-                                <option value="">None</option>
+                                <option value="">{{ __("admin.none") }}</option>
                                 @foreach($copyFromOptions as $opt)
                                     <option value="{{ $opt->id }}" {{ $egg->copy_script_from !== $opt->id ?: 'selected' }}>{{ $opt->name }}</option>
                                 @endforeach
@@ -57,12 +57,12 @@
                             <p class="text-muted small">If selected, script above will be ignored and script from selected option will be used in place.</p>
                         </div>
                         <div class="form-group col-sm-4">
-                            <label class="control-label">Script Container</label>
+                            <label class="control-label">{{ __("admin.install_container") }}</label>
                             <input type="text" name="script_container" class="form-control" value="{{ $egg->script_container }}" />
                             <p class="text-muted small">Docker container to use when running this script for the server.</p>
                         </div>
                         <div class="form-group col-sm-4">
-                            <label class="control-label">Script Entrypoint Command</label>
+                            <label class="control-label">{{ __("admin.entrypoint_command") }}</label>
                             <input type="text" name="script_entry" class="form-control" value="{{ $egg->script_entry }}" />
                             <p class="text-muted small">The entrypoint command to use for this script.</p>
                         </div>
@@ -77,7 +77,7 @@
                                     </a>
                                 @endforeach
                             @else
-                                <em>none</em>
+                                <em>{{ __("admin.none") }}</em>
                             @endif
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                 <div class="box-footer">
                     {!! csrf_field() !!}
                     <textarea name="script_install" class="hidden"></textarea>
-                    <button type="submit" name="_method" value="PATCH" class="btn btn-primary btn-sm pull-right">Save</button>
+                    <button type="submit" name="_method" value="PATCH" class="btn btn-primary btn-sm pull-right">{{ __("admin.save") }}</button>
                 </div>
             </div>
         </div>
