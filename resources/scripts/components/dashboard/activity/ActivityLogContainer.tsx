@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityLogFilters, useActivityLogs } from "@/api/account/activity";
-import { useFlashKey } from "@/plugins/useFlash";
-import PageContentBlock from "@/components/elements/PageContentBlock";
-import tw from "twin.macro";
-import FlashMessageRender from "@/components/FlashMessageRender";
-import { Link } from "react-router-dom";
-import { format, formatDistanceToNowStrict } from "date-fns";
-import { ActivityLog } from "@definitions/user";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faScrollOld, faServer, faUserLock } from "@fortawesome/pro-duotone-svg-icons";
-import { faUserLock as faUserLockF } from "@fortawesome/free-solid-svg-icons";
-import Tooltip from "@/components/elements/tooltip/Tooltip";
-import Spinner from "@/components/elements/Spinner";
-import styled from "styled-components/macro";
-import { useActivityLogFilters } from "@/components/dashboard/activity/ActivityLogFilters";
-import ActivityLogEntry from "@/components/elements/activity/ActivityLogEntry";
-
-const Code = styled.code`${tw`px-1 py-0.5 bg-neutral-700 rounded`}`;
+import React, { useEffect, useState } from 'react';
+import { ActivityLogFilters, useActivityLogs } from '@/api/account/activity';
+import { useFlashKey } from '@/plugins/useFlash';
+import PageContentBlock from '@/components/elements/PageContentBlock';
+import FlashMessageRender from '@/components/FlashMessageRender';
+import { Link } from 'react-router-dom';
+import PaginationFooter from '@/components/elements/table/PaginationFooter';
+import { DesktopComputerIcon, XCircleIcon } from '@heroicons/react/solid';
+import Spinner from '@/components/elements/Spinner';
+import { styles as btnStyles } from '@/components/elements/button/index';
+import classNames from 'classnames';
+import ActivityLogEntry from '@/components/elements/activity/ActivityLogEntry';
+import Tooltip from '@/components/elements/tooltip/Tooltip';
+import useLocationHash from '@/plugins/useLocationHash';
 
 export default () => {
     const { t } = useTranslation("dashboard");
-    const [filters, setFilters] = useActivityLogFilters();
-    const { clearAndAddHttpError } = useFlashKey("account");
-    const { data, size, setSize, isValidating, error } = useActivityLogs(filters, {
+    const { hash } = useLocationHash();
+    const { clearAndAddHttpError } = useFlashKey('account');
+    const [filters, setFilters] = useState<ActivityLogFilters>({ page: 1, sorts: { timestamp: -1 } });
+    const { data, isValidating, error } = useActivityLogs(filters, {
         revalidateOnMount: true,
         revalidateOnFocus: false,
     });
+
+    useEffect(() => {
+        setFilters((value) => ({ ...value, filters: { ip: hash.ip, event: hash.event } }));
+    }, [hash]);
 
     useEffect(() => {
         clearAndAddHttpError(error);
@@ -34,41 +34,40 @@ export default () => {
 
     return (
         <PageContentBlock title={t("account_activity_log")}>
-            <FlashMessageRender byKey={"account"} />
-            {(filters.action || filters.ip || filters.timestamp) && (
-                <div css={tw`flex justify-end mb-2`}>
+            <FlashMessageRender byKey={'account'} />
+            {(filters.filters?.event || filters.filters?.ip) && (
+                <div className={'flex justify-end mb-2'}>
                     <Link
-                        to={"#"}
-                        css={tw`text-xs uppercase tracking-wide no-underline`}
-                        onClick={() => setFilters({})}
+                        to={'#'}
+                        className={classNames(btnStyles.button, btnStyles.text, 'w-full sm:w-auto')}
+                        onClick={() => setFilters((value) => ({ ...value, filters: {} }))}
                     >
-                        Clear Filters <FontAwesomeIcon icon={faUserLockF} css={tw`ml-2`} />
+                        Clear Filters <XCircleIcon className={'w-4 h-4 ml-2'} />
                     </Link>
                 </div>
             )}
             {!data && isValidating ? (
                 <Spinner centered />
-            ) : !data?.length ? (
-                <p css={tw`text-center text-sm text-neutral-400`}>
-                    No activity logs available for this account.
-                </p>
             ) : (
-                <div>
-                    {data.map((activity, index) => (
-                        <ActivityLogEntry key={index} activity={activity} />
+                <div className={'bg-gray-700'}>
+                    {data?.items.map((activity) => (
+                        <ActivityLogEntry key={activity.id} activity={activity}>
+                            {typeof activity.properties.useragent === 'string' && (
+                                <Tooltip content={activity.properties.useragent} placement={'top'}>
+                                    <span>
+                                        <DesktopComputerIcon />
+                                    </span>
+                                </Tooltip>
+                            )}
+                        </ActivityLogEntry>
                     ))}
-                    {data.length % 25 === 0 && (
-                        <div css={tw`mt-4 flex justify-center`}>
-                            <button
-                                onClick={() => setSize(size + 1)}
-                                disabled={isValidating}
-                                css={tw`px-4 py-2 bg-neutral-700 rounded text-sm hover:bg-neutral-600 disabled:opacity-50`}
-                            >
-                                Load More
-                            </button>
-                        </div>
-                    )}
                 </div>
+            )}
+            {data && (
+                <PaginationFooter
+                    pagination={data.pagination}
+                    onPageSelect={(page) => setFilters((value) => ({ ...value, page }))}
+                />
             )}
         </PageContentBlock>
     );
