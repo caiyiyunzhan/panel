@@ -12,7 +12,12 @@ import tw from 'twin.macro';
 import { useTranslation } from "react-i18next";
 
 export default ({
-    const { t } = useTranslation("server"); subuser }: { subuser: Subuser }) => {
+    subuser }: { subuser: Subuser }) => {
+    const { t } = useTranslation("server");
+    const { t } = useTranslation("server");
+    const { t } = useTranslation("}) => {
+    const { t } = useTranslation("server");
+    ");
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
 

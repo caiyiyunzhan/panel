@@ -15,7 +15,8 @@ interface Props {
 }
 
 export default ({
-    const { t } = useTranslation("server"); scheduleId, onDeleted }: Props) => {
+    scheduleId, onDeleted }: Props) => {
+    const { t } = useTranslation("server");
     const [visible, setVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);

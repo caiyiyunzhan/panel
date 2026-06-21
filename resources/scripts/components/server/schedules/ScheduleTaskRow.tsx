@@ -41,7 +41,8 @@ const getActionDetails = (action: string): [string, any] => {
 };
 
 export default ({
-    const { t } = useTranslation("server"); schedule, task }: Props) => {
+    schedule, task }: Props) => {
+    const { t } = useTranslation("server");
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { clearFlashes, addError } = useFlash();
     const [visible, setVisible] = useState(false);

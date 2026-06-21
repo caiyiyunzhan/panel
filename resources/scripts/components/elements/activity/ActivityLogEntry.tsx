@@ -9,6 +9,7 @@ import { FolderOpenIcon, TerminalIcon } from '@heroicons/react/solid';
 import classNames from 'classnames';
 import style from './style.module.css';
 import Avatar from '@/components/Avatar';
+import { useTranslation } from "react-i18next";
 import useLocationHash from '@/plugins/useLocationHash';
 import { getObjectKeys, isObject } from '@/lib/objects';
 
@@ -38,11 +39,8 @@ function wrapProperties(value: unknown): any {
     return value;
 }
 
-export default ({
-    ...props
-}: any) => {
-    const { t } = useTranslation("strings");
-    const ActivityLogEntryInner = ({ activity, children }: Props) => {
+export default ({ activity, children }: Props) => {
+    const { t } = useTranslation("strings");: Props) => {
     const { pathTo } = useLocationHash();
     const actor = activity.relationships.actor;
     const properties = wrapProperties(activity.properties);

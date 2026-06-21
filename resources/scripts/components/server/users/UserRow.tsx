@@ -15,7 +15,8 @@ interface Props {
 }
 
 export default ({
-    const { t } = useTranslation("server"); subuser }: Props) => {
+    subuser }: Props) => {
+    const { t } = useTranslation("server");
     const uuid = useStoreState((state) => state.user!.data!.uuid);
     const [visible, setVisible] = useState(false);
 
