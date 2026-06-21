@@ -7,6 +7,7 @@ import AllocationRow from '@/components/server/network/AllocationRow';
 import Button from '@/components/elements/Button';
 import createServerAllocation from '@/api/server/network/createServerAllocation';
 import tw from 'twin.macro';
+import { useTranslation } from 'react-i18next';
 import Can from '@/components/elements/Can';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import getServerAllocations from '@/api/swr/getServerAllocations';
@@ -51,7 +52,7 @@ const NetworkContainer = () => {
     };
 
     return (
-        <ServerContentBlock showFlashKey={'server:network'} title={'Network'}>
+        <ServerContentBlock showFlashKey={'server:network'} title={t('network')}>
             {!data ? (
                 <Spinner size={'large'} centered />
             ) : (

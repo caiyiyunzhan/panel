@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import TitledGreyBox from '@/components/elements/TitledGreyBox';
 import tw from 'twin.macro';
+import { useTranslation } from 'react-i18next';
 import VariableBox from '@/components/server/startup/VariableBox';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import getServerStartup from '@/api/swr/getServerStartup';

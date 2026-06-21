@@ -41,6 +41,7 @@ const ActivePill = ({ active }: { active: boolean }) => (
 );
 
 export default () => {
+    const { t } = useTranslation('server');
     const history = useHistory();
     const { id: scheduleId } = useParams<Params>();
 
@@ -63,12 +64,12 @@ export default () => {
             return;
         }
 
-        clearFlashes('schedules');
+        clearFlashes({t('schedules')});
         getServerSchedule(uuid, Number(scheduleId))
             .then((schedule) => appendSchedule(schedule))
             .catch((error) => {
                 console.error(error);
-                clearAndAddHttpError({ error, key: 'schedules' });
+                clearAndAddHttpError({ error, key: {t('schedules')} });
             })
             .then(() => setIsLoading(false));
     }, [scheduleId]);
@@ -78,8 +79,8 @@ export default () => {
     }, []);
 
     return (
-        <PageContentBlock title={'Schedules'}>
-            <FlashMessageRender byKey={'schedules'} css={tw`mb-4`} />
+        <PageContentBlock title={{t('schedules')}}>
+            <FlashMessageRender byKey={{t('schedules')}} css={tw`mb-4`} />
             {!schedule || isLoading ? (
                 <Spinner size={'large'} centered />
             ) : (

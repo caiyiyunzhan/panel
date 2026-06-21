@@ -6,6 +6,7 @@ import CreateBackupButton from '@/components/server/backups/CreateBackupButton';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import BackupRow from '@/components/server/backups/BackupRow';
 import tw from 'twin.macro';
+import { useTranslation } from 'react-i18next';
 import getServerBackups, { Context as ServerBackupContext } from '@/api/swr/getServerBackups';
 import { ServerContext } from '@/state/server';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
@@ -33,7 +34,7 @@ const BackupContainer = () => {
     }
 
     return (
-        <ServerContentBlock title={'Backups'}>
+        <ServerContentBlock title={t('backups')}>
             <FlashMessageRender byKey={'backups'} css={tw`mb-4`} />
             <Pagination data={backups} onPageSelect={setPage}>
                 {({ items }) =>
@@ -76,6 +77,7 @@ const BackupContainer = () => {
 };
 
 export default () => {
+    const { t } = useTranslation('server');
     const [page, setPage] = useState<number>(1);
     return (
         <ServerBackupContext.Provider value={{ page, setPage }}>

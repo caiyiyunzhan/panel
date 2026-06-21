@@ -1,32 +1,33 @@
-import TransferListener from '@/components/server/TransferListener';
-import React, { useEffect, useState } from 'react';
-import { NavLink, Route, Switch, useRouteMatch } from 'react-router-dom';
-import NavigationBar from '@/components/NavigationBar';
-import TransitionRouter from '@/TransitionRouter';
-import WebsocketHandler from '@/components/server/WebsocketHandler';
-import { ServerContext } from '@/state/server';
-import { CSSTransition } from 'react-transition-group';
-import Can from '@/components/elements/Can';
-import Spinner from '@/components/elements/Spinner';
-import { NotFound, ServerError } from '@/components/elements/ScreenBlock';
-import { httpErrorToHuman } from '@/api/http';
-import { useStoreState } from 'easy-peasy';
-import SubNavigation from '@/components/elements/SubNavigation';
-import InstallListener from '@/components/server/InstallListener';
-import ErrorBoundary from '@/components/elements/ErrorBoundary';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { useLocation } from 'react-router';
-import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
-import PermissionRoute from '@/components/elements/PermissionRoute';
-import routes from '@/routers/routes';
+﻿import TransferListener from "@/components/server/TransferListener";
+import React, { useEffect, useState } from "react";
+import { NavLink, Route, Switch, useRouteMatch } from "react-router-dom";
+import NavigationBar from "@/components/NavigationBar";
+import TransitionRouter from "@/TransitionRouter";
+import WebsocketHandler from "@/components/server/WebsocketHandler";
+import { ServerContext } from "@/state/server";
+import { CSSTransition } from "react-transition-group";
+import Can from "@/components/elements/Can";
+import Spinner from "@/components/elements/Spinner";
+import { NotFound, ServerError } from "@/components/elements/ScreenBlock";
+import { httpErrorToHuman } from "@/api/http";
+import { useStoreState } from "easy-peasy";
+import SubNavigation from "@/components/elements/SubNavigation";
+import InstallListener from "@/components/server/InstallListener";
+import ErrorBoundary from "@/components/elements/ErrorBoundary";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router";
+import ConflictStateRenderer from "@/components/server/ConflictStateRenderer";
+import PermissionRoute from "@/components/elements/PermissionRoute";
+import routes, { routeNameKeys } from "@/routers/routes";
+import { useTranslation } from "react-i18next";
 
 export default () => {
     const match = useRouteMatch<{ id: string }>();
     const location = useLocation();
 
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
-    const [error, setError] = useState('');
+    const [error, setError] = useState("");
 
     const id = ServerContext.useStoreState((state) => state.server.data?.id);
     const uuid = ServerContext.useStoreState((state) => state.server.data?.uuid);
@@ -35,11 +36,22 @@ export default () => {
     const getServer = ServerContext.useStoreActions((actions) => actions.server.getServer);
     const clearServerState = ServerContext.useStoreActions((actions) => actions.clearServerState);
 
+    const { t: tDash } = useTranslation("dashboard");
+    const { t: tSrv } = useTranslation("server");
+
+    const translateName = (name: string | undefined): string => {
+        if (!name) return "";
+        const key = routeNameKeys[name];
+        if (!key) return name;
+        const [ns, k] = key.split(":");
+        return ns === "dashboard" ? tDash(k) : tSrv(k);
+    };
+
     const to = (value: string, url = false) => {
-        if (value === '/') {
+        if (value === "/") {
             return url ? match.url : match.path;
         }
-        return `${(url ? match.url : match.path).replace(/\/*$/, '')}/${value.replace(/^\/+/, '')}`;
+        return `${(url ? match.url : match.path).replace(/\/*$/, "")}/${value.replace(/^\/+/, "")}`;
     };
 
     useEffect(
@@ -50,7 +62,7 @@ export default () => {
     );
 
     useEffect(() => {
-        setError('');
+        setError("");
 
         getServer(match.params.id).catch((error) => {
             console.error(error);
@@ -63,17 +75,17 @@ export default () => {
     }, [match.params.id]);
 
     return (
-        <React.Fragment key={'server-router'}>
+        <React.Fragment key={"server-router"}>
             <NavigationBar />
             {!uuid || !id ? (
                 error ? (
                     <ServerError message={error} />
                 ) : (
-                    <Spinner size={'large'} centered />
+                    <Spinner size={"large"} centered />
                 )
             ) : (
                 <>
-                    <CSSTransition timeout={150} classNames={'fade'} appear in>
+                    <CSSTransition timeout={150} classNames={"fade"} appear in>
                         <SubNavigation>
                             <div>
                                 {routes.server
@@ -82,18 +94,17 @@ export default () => {
                                         route.permission ? (
                                             <Can key={route.path} action={route.permission} matchAny>
                                                 <NavLink to={to(route.path, true)} exact={route.exact}>
-                                                    {route.name}
+                                                    {translateName(route.name)}
                                                 </NavLink>
                                             </Can>
                                         ) : (
                                             <NavLink key={route.path} to={to(route.path, true)} exact={route.exact}>
-                                                {route.name}
+                                                {translateName(route.name)}
                                             </NavLink>
                                         )
                                     )}
                                 {rootAdmin && (
-                                    // eslint-disable-next-line react/jsx-no-target-blank
-                                    <a href={`/admin/servers/view/${serverId}`} target={'_blank'}>
+                                    <a href={`/admin/servers/view/${serverId}`} target={"_blank"}>
                                         <FontAwesomeIcon icon={faExternalLinkAlt} />
                                     </a>
                                 )}
@@ -116,7 +127,7 @@ export default () => {
                                             </Spinner.Suspense>
                                         </PermissionRoute>
                                     ))}
-                                    <Route path={'*'} component={NotFound} />
+                                    <Route path={"*"} component={NotFound} />
                                 </Switch>
                             </TransitionRouter>
                         </ErrorBoundary>

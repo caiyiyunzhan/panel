@@ -1,27 +1,28 @@
-import React, { useEffect } from 'react';
-import { httpErrorToHuman } from '@/api/http';
-import { CSSTransition } from 'react-transition-group';
-import Spinner from '@/components/elements/Spinner';
-import FileObjectRow from '@/components/server/files/FileObjectRow';
-import FileManagerBreadcrumbs from '@/components/server/files/FileManagerBreadcrumbs';
-import { FileObject } from '@/api/server/files/loadDirectory';
-import NewDirectoryButton from '@/components/server/files/NewDirectoryButton';
-import { NavLink, useLocation } from 'react-router-dom';
-import Can from '@/components/elements/Can';
-import { ServerError } from '@/components/elements/ScreenBlock';
-import tw from 'twin.macro';
-import { Button } from '@/components/elements/button/index';
-import { ServerContext } from '@/state/server';
-import useFileManagerSwr from '@/plugins/useFileManagerSwr';
-import FileManagerStatus from '@/components/server/files/FileManagerStatus';
-import MassActionsBar from '@/components/server/files/MassActionsBar';
-import UploadButton from '@/components/server/files/UploadButton';
-import ServerContentBlock from '@/components/elements/ServerContentBlock';
-import { useStoreActions } from '@/state/hooks';
-import ErrorBoundary from '@/components/elements/ErrorBoundary';
-import { FileActionCheckbox } from '@/components/server/files/SelectFileCheckbox';
-import { hashToPath } from '@/helpers';
-import style from './style.module.css';
+﻿import React, { useEffect } from "react";
+import { httpErrorToHuman } from "@/api/http";
+import { CSSTransition } from "react-transition-group";
+import Spinner from "@/components/elements/Spinner";
+import FileObjectRow from "@/components/server/files/FileObjectRow";
+import FileManagerBreadcrumbs from "@/components/server/files/FileManagerBreadcrumbs";
+import { FileObject } from "@/api/server/files/loadDirectory";
+import NewDirectoryButton from "@/components/server/files/NewDirectoryButton";
+import { NavLink, useLocation } from "react-router-dom";
+import Can from "@/components/elements/Can";
+import { ServerError } from "@/components/elements/ScreenBlock";
+import tw from "twin.macro";
+import { Button } from "@/components/elements/button/index";
+import { ServerContext } from "@/state/server";
+import useFileManagerSwr from "@/plugins/useFileManagerSwr";
+import FileManagerStatus from "@/components/server/files/FileManagerStatus";
+import MassActionsBar from "@/components/server/files/MassActionsBar";
+import UploadButton from "@/components/server/files/UploadButton";
+import ServerContentBlock from "@/components/elements/ServerContentBlock";
+import { useStoreActions } from "@/state/hooks";
+import ErrorBoundary from "@/components/elements/ErrorBoundary";
+import { FileActionCheckbox } from "@/components/server/files/SelectFileCheckbox";
+import { hashToPath } from "@/helpers";
+import style from "./style.module.css";
+import { useTranslation } from "react-i18next";
 
 const sortFiles = (files: FileObject[]): FileObject[] => {
     const sortedFiles: FileObject[] = files
@@ -40,9 +41,10 @@ export default () => {
 
     const setSelectedFiles = ServerContext.useStoreActions((actions) => actions.files.setSelectedFiles);
     const selectedFilesLength = ServerContext.useStoreState((state) => state.files.selectedFiles.length);
+    const { t } = useTranslation("server");
 
     useEffect(() => {
-        clearFlashes('files');
+        clearFlashes("files");
         setSelectedFiles([]);
         setDirectory(hashToPath(hash));
     }, [hash]);
@@ -60,45 +62,44 @@ export default () => {
     }
 
     return (
-        <ServerContentBlock title={'File Manager'} showFlashKey={'files'}>
+        <ServerContentBlock title={t("file_manager")} showFlashKey={"files"}>
             <ErrorBoundary>
-                <div className={'flex flex-wrap-reverse md:flex-nowrap mb-4'}>
+                <div className={"flex flex-wrap-reverse md:flex-nowrap mb-4"}>
                     <FileManagerBreadcrumbs
                         renderLeft={
                             <FileActionCheckbox
-                                type={'checkbox'}
+                                type={"checkbox"}
                                 css={tw`mx-4`}
                                 checked={selectedFilesLength === (files?.length === 0 ? -1 : files?.length)}
                                 onChange={onSelectAllClick}
                             />
                         }
                     />
-                    <Can action={'file.create'}>
+                    <Can action={"file.create"}>
                         <div className={style.manager_actions}>
                             <FileManagerStatus />
                             <NewDirectoryButton />
                             <UploadButton />
                             <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
-                                <Button>New File</Button>
+                                <Button>{t("new_file")}</Button>
                             </NavLink>
                         </div>
                     </Can>
                 </div>
             </ErrorBoundary>
             {!files ? (
-                <Spinner size={'large'} centered />
+                <Spinner size={"large"} centered />
             ) : (
                 <>
                     {!files.length ? (
-                        <p css={tw`text-sm text-neutral-400 text-center`}>This directory seems to be empty.</p>
+                        <p css={tw`text-sm text-neutral-400 text-center`}>{t("empty_directory")}</p>
                     ) : (
-                        <CSSTransition classNames={'fade'} timeout={150} appear in>
+                        <CSSTransition classNames={"fade"} timeout={150} appear in>
                             <div>
                                 {files.length > 250 && (
                                     <div css={tw`rounded bg-yellow-400 mb-px p-3`}>
                                         <p css={tw`text-yellow-900 text-sm text-center`}>
-                                            This directory is too large to display in the browser, limiting the output
-                                            to the first 250 files.
+                                            {t("directory_too_large")}
                                         </p>
                                     </div>
                                 )}
